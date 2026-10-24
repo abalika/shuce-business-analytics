@@ -1,0 +1,65 @@
+{
+  "before": {
+    "ok": true,
+    "source_batches": 4,
+    "files": 13,
+    "counts": {
+      "analyses": 1,
+      "datasets": 1,
+      "reports": 0,
+      "review_sources": 3,
+      "reviews": 3
+    }
+  },
+  "backup": {
+    "ok": true,
+    "path": "[PROJECT]\\work\\evaluation-backup-model-settings-release-acceptance-20261024142548237962.zip",
+    "bytes": 23692,
+    "sha256": "ced2dcb3fb5f59f96ab8bf44aa61c8e6ca4d1ea37b18c970b427350a027f4924",
+    "counts": {
+      "analyses": 1,
+      "datasets": 1,
+      "reports": 0,
+      "review_sources": 3,
+      "reviews": 3
+    }
+  },
+  "verify": {
+    "ok": true,
+    "source_batches": 4,
+    "files": 13,
+    "counts": {
+      "analyses": 1,
+      "datasets": 1,
+      "reports": 0,
+      "review_sources": 3,
+      "reviews": 3
+    }
+  },
+  "restore": {
+    "ok": true,
+    "source_batches": 4,
+    "files": 13,
+    "counts": {
+      "analyses": 1,
+      "datasets": 1,
+      "reports": 0,
+      "review_sources": 3,
+      "reviews": 3
+    },
+    "restored_data_dir": "[PROJECT]\\work\\evaluation-backup-model-settings-release-acceptance-20261024142548237962",
+    "replaced_existing_data": false
+  },
+  "after": {
+    "ok": true,
+    "source_batches": 4,
+    "files": 13,
+    "counts": {
+      "analyses": 1,
+      "datasets": 1,
+      "reports": 0,
+      "review_sources": 3,
+      "reviews": 3
+    }
+  }
+}

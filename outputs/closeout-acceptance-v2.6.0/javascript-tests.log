@@ -1,0 +1,30 @@
+✔ app: disconnected server gives recovery instruction (23.9223ms)
+✔ app: readable backend failure is retained (1.138ms)
+✔ app: malformed response has readable fallback (0.9588ms)
+✔ ops: disconnected server gives recovery instruction (1.197ms)
+✔ ops: readable backend failure is retained (1.0572ms)
+✔ ops: malformed response has readable fallback (1.7861ms)
+✔ settings opens with blank password and an accessible labeled dialog (3.0164ms)
+✔ save sends to local backend, clears password and updates mode immediately (4.6899ms)
+✔ closing the dialog always clears an unsaved password (1.0986ms)
+✔ offline mode disables controls and cannot start provider tests or saves (1.4685ms)
+✔ connection test leaves form credentials for save, but does not auto-save (1.0847ms)
+✔ repeated clicks do not submit concurrent saves (1.0628ms)
+✔ connection failure exposes a recovery message, not raw network details (0.794ms)
+PASS notes stay attached to their review
+PASS new instance recovers persisted notes
+PASS clearing one draft keeps the other
+PASS next-cycle draft keeps base review and declaration
+PASS task can be cleared separately
+PASS malformed stored data is not restored
+PASS storage failure is exposed without throwing
+{"passed":7}
+✔ tests\review-drafts.test.cjs (64.8389ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 121.5746

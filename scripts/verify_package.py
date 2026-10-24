@@ -12,7 +12,7 @@ ROOT_FILES = {'README.md','AGENTS.md','HANDOFF.md','requirements.txt','requireme
               '.gitignore','.gitattributes','.env.example','启动数策.cmd','停止数策.cmd','离线演示.cmd','数据维护.cmd',
               'LICENSE','CHANGELOG.md','SECURITY.md','CONTRIBUTING.md'}
 EVIDENCE = {'outputs/最终公开审查-v2.6.md','outputs/manual-verification-v2.6.json',
-            'outputs/privacy-scan-v2.6.json'}
+            'outputs/privacy-scan-v2.6.json','outputs/real-model-settings-v2.6.json'}
 REQUIRED = {'README.md','app/main.py','app/version.py','web/index.html','web/ops.js',
             'scripts/launch.ps1','scripts/stop.ps1','scripts/setup.ps1','scripts/service.py',
             'scripts/evaluate.py','scripts/offline_eval.py','scripts/verify_package.py','scripts/package_project.py',
@@ -22,6 +22,8 @@ REQUIRED = {'README.md','app/main.py','app/version.py','web/index.html','web/ops
             'outputs/最终公开审查-v2.6.md','outputs/manual-verification-v2.6.json',
             'outputs/closeout-acceptance-v2.6.0/evaluation.json','outputs/closeout-acceptance-v2.6.0/pytest.xml'}
 REQUIRED |= ROOT_FILES
+REQUIRED |= {'app/model_settings.py','web/model-settings.js','scripts/model_settings_smoke.py',
+             'tests/test_model_settings.py','tests/model-settings.test.cjs'}
 
 
 def allowed(name):

@@ -31,3 +31,4 @@ outputs/*
 !outputs/manual-verification-v2.6.json
 !outputs/privacy-scan-v2.6.json
 !outputs/closeout-acceptance-v2.6.0/*.log
+!outputs/real-model-settings-v2.6.json

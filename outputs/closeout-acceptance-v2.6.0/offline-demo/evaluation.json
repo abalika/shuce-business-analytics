@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "version": "2.6.0",
+  "date": "2026-10-24T14:25:42.887307",
+  "work_data": "[PROJECT]/work/isolated-offline-data",
+  "offline": true,
+  "provider_network_attempts": 0,
+  "model_generation_requests": 0,
+  "actual_cents": 286600,
+  "target_cents": 266000,
+  "raw_sql_categories_checked": 8,
+  "saved_snapshot_reopened": true,
+  "three_evidence_exports": true,
+  "xlsx_verified": true,
+  "static_html_external_assets": false,
+  "browser_inspected": false,
+  "files": {
+    "evidence-operations.csv": "c8d7229596d5253bc5f23f59ceaabe7e79d599f53cc8e6a636e39964ce4d7332",
+    "evidence-sales.csv": "cc3b0844a9602dfa9b9b70b47e12b6d6f1ae9d22834e701776da3fc3a53cbe1a",
+    "evidence-targets.csv": "22d6f42137c2b7e0b25362860e2d11c9c3c6811e24c00a2d8e55ae64bf1dbe61",
+    "index.html": "f179208363684aab15e9f41a704bbf932350e28ea584f433f6f2cf6c64ecf1c5",
+    "report.html": "c6cb501178e12fda30719aeb5d757945d8e8216f67b1755b36d3ae7c9969c07b",
+    "review.json": "b522fed0ff572429796d1b00e9d687e188026fd45081c43c6675d2b175573a31",
+    "review.xlsx": "76b062bcee04634b6584b57613b8c2d2557809f39018baab2ef4436c0689a5a1",
+    "SIMULATED-operations.csv": "cb6a536d383ed20c38f85ac4e56a164213e298906ea9dc2a83e30b16f2307d5d",
+    "SIMULATED-sales.csv": "c1d74013c991c2b66a538826a0e156630d0b5b7b56429d5b5331212327f4eba4",
+    "SIMULATED-targets.csv": "24745ff8fb74e4ddc9361f8d9b777d4f925aad87632e737112795b65d8c04adc"
+  },
+  "public_path_redacted": true
+}

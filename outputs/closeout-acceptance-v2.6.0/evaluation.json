@@ -1,0 +1,243 @@
+{
+  "ok": true,
+  "version": "2.6.0",
+  "started_at": "2026-10-24T14:24:45.513951",
+  "checks": [
+    {
+      "name": "pytest",
+      "passed": true,
+      "exit_code": 0,
+      "log": "pytest.log",
+      "sha256": "f54389f09265c0667407109e12048be0b5761768078741eda49fbd380b10290d"
+    },
+    {
+      "name": "javascript-tests",
+      "passed": true,
+      "exit_code": 0,
+      "log": "javascript-tests.log",
+      "sha256": "fda8053e6d727db48cf18e3f55c4ed858f7a0a821302e953979b81ef34e5f821"
+    },
+    {
+      "name": "javascript-syntax-app",
+      "passed": true,
+      "exit_code": 0,
+      "log": "javascript-syntax-app.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "javascript-syntax-ops",
+      "passed": true,
+      "exit_code": 0,
+      "log": "javascript-syntax-ops.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "javascript-syntax-model-settings",
+      "passed": true,
+      "exit_code": 0,
+      "log": "javascript-syntax-model-settings.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "offline",
+      "passed": true,
+      "exit_code": 0,
+      "log": "offline.log",
+      "sha256": "7578f1666622d8840dbb425d16b2889c09c2c5b2fda33af50af595212a6616c3"
+    },
+    {
+      "name": "benchmark-first",
+      "passed": true,
+      "exit_code": 0,
+      "log": "benchmark-first.log",
+      "sha256": "b1685d8220fde86fa97460f7e278c639121ac7d59093b6e5f4e65898666ff5d7"
+    },
+    {
+      "name": "benchmark-repeat",
+      "passed": true,
+      "exit_code": 0,
+      "log": "benchmark-repeat.log",
+      "sha256": "b1a872e5916b28107b1b69b0a7fda8613309c5ef71e98f9d273e640014a9e70b"
+    },
+    {
+      "name": "backup-verify-restore-recheck",
+      "passed": true,
+      "counts": {
+        "analyses": 1,
+        "datasets": 1,
+        "reports": 0,
+        "review_sources": 3,
+        "reviews": 3
+      }
+    }
+  ],
+  "real_model_requests": 0,
+  "benchmark": {
+    "ok": true,
+    "suite": "shuce-offline-contract-v1",
+    "scope": "固定模拟样本的离线规则规划、口径守卫及三表计算；不是实时模型能力评分",
+    "suite_sha256": "51b7eb3805f8d35c06279b69e622c1164df5a040910e326e6d184dbce1c4eb9f",
+    "runner_sha256": "bd5b061a33cf950f99b25850981db5db094f6d2d3a383d421a8e45b4484903e0",
+    "version": "2.6.0",
+    "time_utc": "2026-10-24T06:25:47.560495+00:00",
+    "git": {
+      "commit": "55e7925d6f1f536f6a877cde5a6268d92a2419b1",
+      "dirty": false
+    },
+    "total": 20,
+    "passed": 20,
+    "pass_rate": 1.0,
+    "failure_categories": {},
+    "elapsed_ms": 806.263,
+    "results": [
+      {
+        "id": "net-total",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 14.691
+      },
+      {
+        "id": "positive-total",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 10.755
+      },
+      {
+        "id": "negative-total",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 12.553
+      },
+      {
+        "id": "order-count",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 11.876
+      },
+      {
+        "id": "period-net",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 12.933
+      },
+      {
+        "id": "net-compare",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 18.732
+      },
+      {
+        "id": "quality",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 10.542
+      },
+      {
+        "id": "ctr",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 12.774
+      },
+      {
+        "id": "views",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 12.045
+      },
+      {
+        "id": "clicks",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 11.762
+      },
+      {
+        "id": "ambiguous-income",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 3.132
+      },
+      {
+        "id": "missing-periods",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 1.793
+      },
+      {
+        "id": "profit-guard",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 2.328
+      },
+      {
+        "id": "code-guard",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 2.04
+      },
+      {
+        "id": "review-total",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 182.038
+      },
+      {
+        "id": "review-attainment",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 65.099
+      },
+      {
+        "id": "review-orders-not-lines",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 65.323
+      },
+      {
+        "id": "review-reconciled",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 64.717
+      },
+      {
+        "id": "review-period",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 62.603
+      },
+      {
+        "id": "review-currency",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 65.668
+      }
+    ],
+    "mode": "offline-rule-and-deterministic-compute",
+    "model_id": null,
+    "model_parameters": null,
+    "model_requests": 0,
+    "provider_network_attempts": 0,
+    "cost": {
+      "amount": 0,
+      "currency": "USD",
+      "basis": "No provider requests; local compute/electricity not estimated"
+    },
+    "comparison": {
+      "available": true,
+      "reason": "Same frozen questions and assertion runner",
+      "previous_time_utc": "2026-10-24T06:25:45.194216+00:00",
+      "pass_rate_delta": 0.0,
+      "elapsed_ms_delta": -93.799,
+      "previous_git_commit": "55e7925d6f1f536f6a877cde5a6268d92a2419b1"
+    }
+  },
+  "finished_at": "2026-10-24T14:25:48.419072",
+  "elapsed_ms": 62905,
+  "browser_inspected": false,
+  "offline_controls": {
+    "actual_cents": 286600,
+    "target_cents": 266000,
+    "raw_sql_categories_checked": 8,
+    "provider_network_attempts": 0
+  },
+  "public_path_redacted": true
+}

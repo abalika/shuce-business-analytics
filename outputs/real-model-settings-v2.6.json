@@ -1,0 +1,83 @@
+{
+  "ok": true,
+  "time_utc": "2026-10-24T06:29:05.850677+00:00",
+  "model_id": "cn:deepseek-v4.1-flash",
+  "gateway_model_available": true,
+  "checks": [
+    "settings-endpoint-real-chat-json-success",
+    "real-key-session-only-immediate-activation-no-env-write",
+    "real-model-planning-with-deterministic-simulated-control"
+  ],
+  "browser_inspected": false,
+  "real_model_test": true,
+  "credentials_saved_to_disk": false,
+  "gateway_lifecycle_modified": false,
+  "connection_test": {
+    "ok": true,
+    "elapsed_ms": 1463,
+    "parameters": {
+      "temperature": 0,
+      "max_tokens": 32,
+      "json_output": true
+    },
+    "usage_tokens": null
+  },
+  "business_check": {
+    "ok": true,
+    "input": "Project-generated coffee simulation only",
+    "expected_net_amount": 3310.0,
+    "actual_net_amount": 3310.0,
+    "planning_trace": {
+      "provider": "model",
+      "label": "真实模型查询规划",
+      "model": "cn:deepseek-v4.1-flash",
+      "elapsed_ms": 2156,
+      "tokens": 320,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "accepted"
+        }
+      ]
+    },
+    "brief_status": "validated",
+    "brief_trace": {
+      "provider": "model",
+      "label": "真实模型证据摘要",
+      "model": "cn:deepseek-v4.1-flash",
+      "elapsed_ms": 2280,
+      "tokens": 490,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "accepted"
+        }
+      ]
+    },
+    "elapsed_ms": 4457
+  },
+  "cost": {
+    "amount": null,
+    "reason": "Gateway does not return monetary pricing; do not invent zero cost. See model usage where provided."
+  },
+  "service_stopped": true,
+  "real_model_requests": 3,
+  "reported_usage_tokens_excluding_connection": 810,
+  "usage_complete": false,
+  "model_parameters": {
+    "connection": {
+      "temperature": 0,
+      "max_tokens": 32
+    },
+    "planning": {
+      "temperature": 0,
+      "max_tokens": 1300
+    },
+    "brief": {
+      "temperature": 0,
+      "max_tokens": 1800
+    },
+    "response_format": "json_object",
+    "thinking": "disabled"
+  }
+}
