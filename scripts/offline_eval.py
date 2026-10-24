@@ -73,6 +73,9 @@ def evaluate(output):
         require(get(saved_url).json()['report'] == saved['report'], 'Saved snapshot changed')
         page = get(saved_url + '/report').text
         require(not re.search(r'<(?:script|link|img)\b[^>]*(?:src|href)=["\']https?://', page, re.I), 'Report depends on network assets')
+        page = re.sub(r'href="/api/ops/reviews/[^\"]+/export"', 'href="review.json"', page)
+        page = page.replace('<h1>', '<p role="note">预置演示数据 / 非实时：项目生成的模拟业务与规则计算结果，不含实时模型输出。</p><h1>', 1)
+        require('预置演示数据 / 非实时' in page and 'href="/api/' not in page, 'Static report must be labeled and use local downloads')
         store('report.html', page)
         store('review.json', get(saved_url + '/export').content)
         store('review.xlsx', get(saved_url + '/xlsx').content)
