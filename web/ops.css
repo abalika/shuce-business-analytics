@@ -1,0 +1,13 @@
+.card{margin-bottom:22px}.readiness{border-left:4px solid #599275}.handover{display:flex;align-items:flex-start;gap:8px;margin:15px 0}.handover input{width:auto;margin-top:4px}.filters{max-width:600px}.goal-label small{display:block;color:#849489;font-size:11px}.goal-status{white-space:nowrap}.status-shortfall{color:#ab5b38}.status-met{color:#13705b}.status-blocked,.status-missing_target,.status-unknown_actual{color:#95692f}.source-item{border-bottom:1px solid #e3e8df;padding:15px 0}.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.proof-grid>div{background:#f5f8f1;padding:15px;overflow-wrap:anywhere}.proof-grid small{font-size:10px}.controls{background:#f2f6ef;padding:12px;border-radius:8px;margin:12px 0}.investigation-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px}.investigation-grid p{margin:4px 0}.brief-section li{overflow-wrap:anywhere}.task-fields-hidden{display:none}#goalTable td{white-space:nowrap}#investigationSummary{max-height:28vh;overflow:auto}#reportLink{margin-top:12px}#mapping{margin:20px 0}#template{font-size:12px}@media(max-width:680px){.proof-grid,.investigation-grid{grid-template-columns:1fr}.page-head .primary{width:100%}.actions{flex-wrap:wrap}.evidence-pagination{gap:8px}.sidebar nav{flex-wrap:wrap}.sidebar nav>*{width:25%;margin:0}.goal-label{max-width:180px}.goal-label small{white-space:normal}}@media(min-width:681px){main{max-width:1600px;margin:auto}}
+
+.draft-strip{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#f2f6ef;border-radius:8px;padding:10px 14px;margin:12px 0;font-size:12px}.draft-strip .link{flex-shrink:0}.export-actions{margin:12px 0}.contract-guide{margin:18px 0;padding:14px;background:#f8faf5;border-radius:8px}.contract-guide li{margin-bottom:6px}.contract-guide td{min-width:120px}.contract-guide .secondary{display:inline-block;margin-top:12px}@media(max-width:680px){.draft-strip{align-items:flex-start;flex-direction:column}.draft-strip .link{padding-left:0}.export-actions{flex-direction:column;align-items:flex-start}}
+
+/* Short screens scroll the dialog instead of squeezing evidence rows away. */
+#evidenceSource{overflow-wrap:anywhere}
+@media(max-width:680px),(max-height:700px){
+  dialog.evidence-dialog[open]{display:block;overflow:auto;padding:18px}
+  .evidence-dialog .card-head{position:sticky;top:-18px;background:#fff;z-index:1;padding:10px 0}
+  #investigationSummary{max-height:none;overflow:visible}
+  .evidence-dialog #evidenceTable{max-height:45vh;min-height:150px}
+  .evidence-pagination{flex-wrap:wrap}
+}

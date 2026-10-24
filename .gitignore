@@ -1,0 +1,17 @@
+.venv/
+.env
+.env.*
+!.env.example
+.local-model-env
+data/
+demo-data/
+work/
+backups/
+wheelhouse/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.log
+*.zip
+.DS_Store
+Thumbs.db

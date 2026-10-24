@@ -1,0 +1,319 @@
+[
+  {
+    "name": "annotated-doc",
+    "version": "0.0.5",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/annotated-doc/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "annotated-types",
+    "version": "0.8.0",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/annotated-types/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "anyio",
+    "version": "4.15.1",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/anyio/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "certifi",
+    "version": "2026.7.22",
+    "license_metadata": "MPL-2.0",
+    "bundled_notices": [
+      "licenses/dependencies/certifi/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "click",
+    "version": "8.5.0",
+    "license_metadata": "BSD-3-Clause",
+    "bundled_notices": [
+      "licenses/dependencies/click/licenses/LICENSE.txt"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "colorama",
+    "version": "0.4.6",
+    "license_metadata": "See bundled notices / package metadata",
+    "bundled_notices": [
+      "licenses/dependencies/colorama/licenses/LICENSE.txt"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "et_xmlfile",
+    "version": "2.0.0",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/et_xmlfile/LICENCE.python",
+      "licenses/dependencies/et_xmlfile/LICENCE.rst"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "fastapi",
+    "version": "0.143.0",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/fastapi/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "h11",
+    "version": "0.16.0",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/h11/licenses/LICENSE.txt"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "httpcore",
+    "version": "1.0.9",
+    "license_metadata": "BSD-3-Clause",
+    "bundled_notices": [
+      "licenses/dependencies/httpcore/licenses/LICENSE.md"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "httpx",
+    "version": "0.28.1",
+    "license_metadata": "BSD-3-Clause",
+    "bundled_notices": [
+      "licenses/dependencies/httpx/licenses/LICENSE.md"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "idna",
+    "version": "3.20",
+    "license_metadata": "BSD-3-Clause",
+    "bundled_notices": [
+      "licenses/dependencies/idna/licenses/LICENSE.md"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "iniconfig",
+    "version": "2.3.1",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/iniconfig/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "numpy",
+    "version": "2.5.3",
+    "license_metadata": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
+    "bundled_notices": [
+      "licenses/dependencies/numpy/licenses/LICENSE.txt",
+      "licenses/dependencies/numpy/licenses/numpy/_core/include/numpy/libdivide/LICENSE.txt",
+      "licenses/dependencies/numpy/licenses/numpy/_core/src/common/pythoncapi-compat/COPYING",
+      "licenses/dependencies/numpy/licenses/numpy/_core/src/highway/LICENSE",
+      "licenses/dependencies/numpy/licenses/numpy/_core/src/multiarray/dragon4_LICENSE.txt",
+      "licenses/dependencies/numpy/licenses/numpy/_core/src/npysort/x86-simd-sort/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/_core/src/umath/svml/LICENSE",
+      "licenses/dependencies/numpy/licenses/numpy/fft/pocketfft/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/linalg/lapack_lite/LICENSE.txt",
+      "licenses/dependencies/numpy/licenses/numpy/ma/LICENSE",
+      "licenses/dependencies/numpy/licenses/numpy/random/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/random/src/distributions/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/random/src/mt19937/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/random/src/pcg64/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/random/src/philox/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/random/src/sfc64/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/random/src/splitmix64/LICENSE.md"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "openpyxl",
+    "version": "3.1.5",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/openpyxl/LICENCE.rst"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "opentelemetry-api",
+    "version": "1.45.1",
+    "license_metadata": "Apache-2.0",
+    "bundled_notices": [
+      "licenses/dependencies/opentelemetry-api/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "packaging",
+    "version": "26.3",
+    "license_metadata": "Apache-2.0 OR BSD-2-Clause",
+    "bundled_notices": [
+      "licenses/dependencies/packaging/licenses/LICENSE",
+      "licenses/dependencies/packaging/licenses/LICENSE.APACHE",
+      "licenses/dependencies/packaging/licenses/LICENSE.BSD"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "pandas",
+    "version": "2.3.3",
+    "license_metadata": "BSD 3-Clause License",
+    "bundled_notices": [
+      "licenses/dependencies/pandas/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "pluggy",
+    "version": "1.6.0",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/pluggy/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "pydantic",
+    "version": "2.14.0",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/pydantic/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "pydantic_core",
+    "version": "2.50.0",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/pydantic_core/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "Pygments",
+    "version": "2.21.0",
+    "license_metadata": "BSD-2-Clause",
+    "bundled_notices": [
+      "licenses/dependencies/Pygments/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "pytest",
+    "version": "9.1.1",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/pytest/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "python-dateutil",
+    "version": "2.9.0.post0",
+    "license_metadata": "Dual License",
+    "bundled_notices": [
+      "licenses/dependencies/python-dateutil/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "python-dotenv",
+    "version": "1.2.4",
+    "license_metadata": "BSD-3-Clause",
+    "bundled_notices": [
+      "licenses/dependencies/python-dotenv/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "python-multipart",
+    "version": "0.0.32",
+    "license_metadata": "Apache-2.0",
+    "bundled_notices": [
+      "licenses/dependencies/python-multipart/licenses/LICENSE.txt"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "pytz",
+    "version": "2026.5",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/pytz/LICENSE.txt"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "six",
+    "version": "1.17.0",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/six/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "starlette",
+    "version": "1.7.0",
+    "license_metadata": "BSD-3-Clause",
+    "bundled_notices": [
+      "licenses/dependencies/starlette/licenses/LICENSE.md"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "typing-inspection",
+    "version": "0.4.4",
+    "license_metadata": "MIT",
+    "bundled_notices": [
+      "licenses/dependencies/typing-inspection/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "typing_extensions",
+    "version": "4.16.0",
+    "license_metadata": "PSF-2.0",
+    "bundled_notices": [
+      "licenses/dependencies/typing_extensions/licenses/LICENSE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "tzdata",
+    "version": "2026.5",
+    "license_metadata": "Apache-2.0",
+    "bundled_notices": [
+      "licenses/dependencies/tzdata/licenses/LICENSE",
+      "licenses/dependencies/tzdata/licenses/licenses/LICENSE_APACHE"
+    ],
+    "binary_redistributed": false
+  },
+  {
+    "name": "uvicorn",
+    "version": "0.54.0",
+    "license_metadata": "BSD-3-Clause",
+    "bundled_notices": [
+      "licenses/dependencies/uvicorn/licenses/LICENSE.md"
+    ],
+    "binary_redistributed": false
+  }
+]

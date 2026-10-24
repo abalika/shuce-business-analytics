@@ -1,0 +1,12 @@
+function renderScenario(){
+  const g=state.dataset.guide,el=$('#scenarioGuide');el.classList.toggle('hidden',!g);if(!g){el.innerHTML='';return;}
+  el.innerHTML=`<div class="card-head"><h2>${escapeHtml(g.title)}</h2><span class="pill">中文模拟 · 非真实业绩</span></div><p>${escapeHtml(g.summary)}</p><p class="muted">${escapeHtml(g.row_meaning)}</p><div class="scenario-definitions">${g.definitions.map(s=>`<p>${escapeHtml(s)}</p>`).join('')}</div><p class="caption">${escapeHtml(g.caveat)}</p><div class="actions"><button class="primary" id="scenarioCompare">${escapeHtml(g.compare_label)} →</button><button class="secondary" id="scenarioRanking">${escapeHtml(g.ranking_label)}</button><button class="link" id="scenarioRead">先看小表与原始数据 ↗</button></div>`;
+  $('#scenarioCompare').onclick=()=>busy($('#scenarioCompare'),async()=>{tab('analysis');$('#operation').value='compare';$('#metric').value=state.dataset.mode==='orders'?'amount':'clicks';for(const [key,id] of Object.entries({start:'start',end:'end',previous_start:'previousStart',previous_end:'previousEnd'}))$('#'+id).value=g.periods[key];togglePrevious();await analyze({plan:structuredPlan()});});
+  $('#scenarioRanking').onclick=()=>busy($('#scenarioRanking'),async()=>{tab('analysis');$('#operation').value='ranking';togglePrevious();$('#metric').value=state.dataset.mode==='orders'?'positive_amount':'ctr';$('#start').value=state.dataset.quality.date_start;$('#end').value=state.dataset.quality.date_end;await analyze({plan:structuredPlan()});});
+  $('#scenarioRead').onclick=()=>tab('data');
+}
+
+function sampleTable(){
+  const rows=state.detail.sample_rows||[],orders=state.dataset.mode==='orders';
+  return `<h3>先看几条有效记录</h3><p class="caption">以下直接取自当前规范化数据；序号按导入记录计数：表头为1，首条数据为2；含多行单元格时不等于文本行号。${orders?'金额＝数量×单价；负数表示负向调整。'+(state.dataset.guide?.id==='coffee_orders'?'本咖啡店样本的负数是模拟退款。':'具体业务含义需核查数据来源。'):'点击率需用总点击除以总曝光。'}</p><div class="table-wrap"><table><tr><th>记录序号</th><th>日期</th><th>${orders?'商品':'内容'}</th>${orders?'<th>数量</th><th>单价</th><th>金额</th>':'<th>曝光</th><th>点击</th>'}<th>编号</th></tr>${rows.map(r=>`<tr><td>${r.source_row}</td><td>${escapeHtml(r.date)}</td><td>${escapeHtml(r.dimension)}</td>${orders?`<td>${escapeHtml(r.quantity)}</td><td>${value(Number(r.unit_price),'currency')}</td><td>${value(r.amount/100,'currency')}</td>`:`<td>${number(r.views)}</td><td>${number(r.clicks)}</td>`}<td>${escapeHtml(r.entity)}</td></tr>`).join('')}</table></div>`;
+}
