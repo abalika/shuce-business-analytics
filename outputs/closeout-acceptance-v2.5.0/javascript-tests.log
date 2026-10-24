@@ -1,0 +1,23 @@
+✔ app: disconnected server gives recovery instruction (20.2068ms)
+✔ app: readable backend failure is retained (0.8907ms)
+✔ app: malformed response has readable fallback (0.7523ms)
+✔ ops: disconnected server gives recovery instruction (0.8086ms)
+✔ ops: readable backend failure is retained (0.6642ms)
+✔ ops: malformed response has readable fallback (1.6463ms)
+PASS notes stay attached to their review
+PASS new instance recovers persisted notes
+PASS clearing one draft keeps the other
+PASS next-cycle draft keeps base review and declaration
+PASS task can be cleared separately
+PASS malformed stored data is not restored
+PASS storage failure is exposed without throwing
+{"passed":7}
+✔ tests\review-drafts.test.cjs (57.2208ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 108.1007

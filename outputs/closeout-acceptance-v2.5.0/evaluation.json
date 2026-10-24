@@ -1,0 +1,236 @@
+{
+  "ok": true,
+  "version": "2.5.0",
+  "started_at": "2026-10-24T13:53:24.814538",
+  "checks": [
+    {
+      "name": "pytest",
+      "passed": true,
+      "exit_code": 0,
+      "log": "pytest.log",
+      "sha256": "aab9304bea1410e93b0e48aa0736b9cd43eb25f833863e4710b3da19beca8da0"
+    },
+    {
+      "name": "javascript-tests",
+      "passed": true,
+      "exit_code": 0,
+      "log": "javascript-tests.log",
+      "sha256": "c83a124b3bd3c95d6e69de081c64f47a36342cdc776aab5373a1376e4d49330c"
+    },
+    {
+      "name": "javascript-syntax-app",
+      "passed": true,
+      "exit_code": 0,
+      "log": "javascript-syntax-app.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "javascript-syntax-ops",
+      "passed": true,
+      "exit_code": 0,
+      "log": "javascript-syntax-ops.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "offline",
+      "passed": true,
+      "exit_code": 0,
+      "log": "offline.log",
+      "sha256": "66d3463aa206cb6b201a825321f9b10d0a6312b6991338a7d75b888d084016dc"
+    },
+    {
+      "name": "benchmark-first",
+      "passed": true,
+      "exit_code": 0,
+      "log": "benchmark-first.log",
+      "sha256": "1107aa60676040f3cdb6251c57095533cd42e49472cb3e89ddca1c9be2f05202"
+    },
+    {
+      "name": "benchmark-repeat",
+      "passed": true,
+      "exit_code": 0,
+      "log": "benchmark-repeat.log",
+      "sha256": "ff8938700a4b28d39474c779c040374a8fe0bc1b981763abe43cd529a90bba3a"
+    },
+    {
+      "name": "backup-verify-restore-recheck",
+      "passed": true,
+      "counts": {
+        "analyses": 1,
+        "datasets": 1,
+        "reports": 0,
+        "review_sources": 3,
+        "reviews": 3
+      }
+    }
+  ],
+  "real_model_requests": 0,
+  "benchmark": {
+    "ok": true,
+    "suite": "shuce-offline-contract-v1",
+    "scope": "固定模拟样本的离线规则规划、口径守卫及三表计算；不是实时模型能力评分",
+    "suite_sha256": "51b7eb3805f8d35c06279b69e622c1164df5a040910e326e6d184dbce1c4eb9f",
+    "runner_sha256": "bd5b061a33cf950f99b25850981db5db094f6d2d3a383d421a8e45b4484903e0",
+    "version": "2.5.0",
+    "time_utc": "2026-10-24T05:54:17.497315+00:00",
+    "git": {
+      "commit": "c3f878f38857c4c4f063fdbe1e9e85b0f4c4deba",
+      "dirty": true
+    },
+    "total": 20,
+    "passed": 20,
+    "pass_rate": 1.0,
+    "failure_categories": {},
+    "elapsed_ms": 788.88,
+    "results": [
+      {
+        "id": "net-total",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 14.759
+      },
+      {
+        "id": "positive-total",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 11.848
+      },
+      {
+        "id": "negative-total",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 12.714
+      },
+      {
+        "id": "order-count",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 11.901
+      },
+      {
+        "id": "period-net",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 13.677
+      },
+      {
+        "id": "net-compare",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 18.879
+      },
+      {
+        "id": "quality",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 10.695
+      },
+      {
+        "id": "ctr",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 12.183
+      },
+      {
+        "id": "views",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 11.755
+      },
+      {
+        "id": "clicks",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 13.074
+      },
+      {
+        "id": "ambiguous-income",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 2.394
+      },
+      {
+        "id": "missing-periods",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 2.384
+      },
+      {
+        "id": "profit-guard",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 2.194
+      },
+      {
+        "id": "code-guard",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 2.464
+      },
+      {
+        "id": "review-total",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 179.473
+      },
+      {
+        "id": "review-attainment",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 64.984
+      },
+      {
+        "id": "review-orders-not-lines",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 62.653
+      },
+      {
+        "id": "review-reconciled",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 60.942
+      },
+      {
+        "id": "review-period",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 62.748
+      },
+      {
+        "id": "review-currency",
+        "passed": true,
+        "failures": [],
+        "elapsed_ms": 62.456
+      }
+    ],
+    "mode": "offline-rule-and-deterministic-compute",
+    "model_id": null,
+    "model_parameters": null,
+    "model_requests": 0,
+    "provider_network_attempts": 0,
+    "cost": {
+      "amount": 0,
+      "currency": "USD",
+      "basis": "No provider requests; local compute/electricity not estimated"
+    },
+    "comparison": {
+      "available": true,
+      "reason": "Same frozen questions and assertion runner",
+      "previous_time_utc": "2026-10-24T05:54:15.278701+00:00",
+      "pass_rate_delta": 0.0,
+      "elapsed_ms_delta": 22.499,
+      "previous_git_commit": "c3f878f38857c4c4f063fdbe1e9e85b0f4c4deba"
+    }
+  },
+  "finished_at": "2026-10-24T13:54:18.328506",
+  "elapsed_ms": 53512,
+  "browser_inspected": false,
+  "offline_controls": {
+    "actual_cents": 286600,
+    "target_cents": 266000,
+    "raw_sql_categories_checked": 8,
+    "provider_network_attempts": 0
+  },
+  "public_path_redacted": true
+}

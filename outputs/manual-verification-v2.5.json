@@ -1,0 +1,57 @@
+{
+  "ok": true,
+  "version": "2.5.0",
+  "checks": [
+    {
+      "action": "check",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "action": "backup",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "action": "verify",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "action": "restore",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "action": "check",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "action": "restore",
+      "passed": true,
+      "exit_code": 1
+    },
+    {
+      "action": "unrelated-port-occupied",
+      "passed": true,
+      "exit_code": 1,
+      "unrelated_listener_untouched": true
+    },
+    {
+      "action": "missing-virtual-environment",
+      "passed": true,
+      "exit_code": 1,
+      "setup_instruction_present": true
+    }
+  ],
+  "counts": {
+    "analyses": 1,
+    "datasets": 1,
+    "reports": 0,
+    "review_sources": 3,
+    "reviews": 3
+  },
+  "original_working_data_used": false,
+  "model_requests": 0
+}

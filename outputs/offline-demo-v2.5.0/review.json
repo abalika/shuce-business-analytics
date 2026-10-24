@@ -1,0 +1,646 @@
+{
+  "operation": "compare",
+  "metric": "amount",
+  "definition": {
+    "label": "净交易额",
+    "definition": "商品交易逐行数量×成交单价取分；目标来自提供的同周期同门店SKU计划，实际减目标不是经营原因。",
+    "unit": "currency"
+  },
+  "period": {
+    "start": "2026-09-21",
+    "end": "2026-09-27"
+  },
+  "previous_period": {
+    "start": "2026-09-14",
+    "end": "2026-09-20"
+  },
+  "task": {
+    "title": "两店经营周复盘 · 目标与实际（模拟）",
+    "question": "整体是否达标？哪些门店商品未达标，还缺哪些运营证据？",
+    "start": "2026-09-21",
+    "end": "2026-09-27",
+    "previous_start": "2026-09-14",
+    "previous_end": "2026-09-20",
+    "metric": "amount",
+    "confirmed_complete": true,
+    "confirmation_note": "这是项目生成的模拟事件全集，已包含所选期间；不代表真实企业交接。",
+    "previous_review_id": null
+  },
+  "sources": {
+    "sales": {
+      "id": "b016ac0b9dc046d3bb5b2dad824175e4",
+      "name": "模拟 · 三周两店交易",
+      "filename": "两店商品交易.csv",
+      "kind": "sales",
+      "source": "明确模拟：项目生成的三表业务演示，非商家业绩、预算或实际可售记录。",
+      "currency": "元",
+      "mapping": {
+        "event": "明细事件ID",
+        "order": "订单ID",
+        "date": "业务日期",
+        "store": "门店ID",
+        "sku": "商品SKU",
+        "name": "商品名称",
+        "quantity": "数量",
+        "price": "成交单价"
+      },
+      "quality": {
+        "input_rows": 452,
+        "valid_rows": 452,
+        "rejected_rows": 0,
+        "duplicate_participants": 0,
+        "blocking": false,
+        "key_fields": [
+          "store",
+          "event"
+        ]
+      },
+      "file_sha256": "c1d74013c991c2b66a538826a0e156630d0b5b7b56429d5b5331212327f4eba4",
+      "created_at": "2026-10-24T05:54:12.632533+00:00",
+      "contract_version": "retail-review-2.0",
+      "artifact_sha256": {
+        "original": "c1d74013c991c2b66a538826a0e156630d0b5b7b56429d5b5331212327f4eba4",
+        "normalized": "b4fb4da2d1b35338e8394767c99ed3a7d01df3bfa65c519f296836b5cd961533",
+        "diagnostics": "fea51e9188e839d15bc4b1f08a03cdb5aed17feffd9c4ef1751201f3a42f7a79"
+      }
+    },
+    "targets": {
+      "id": "5b40a204bb47484c831c120302c988cd",
+      "name": "模拟 · 三周商品目标",
+      "filename": "两店周目标.csv",
+      "kind": "targets",
+      "source": "明确模拟：项目生成的三表业务演示，非商家业绩、预算或实际可售记录。",
+      "currency": "元",
+      "mapping": {
+        "store": "门店ID",
+        "sku": "商品SKU",
+        "metric": "指标",
+        "currency": "单位",
+        "start": "开始日期",
+        "end": "结束日期",
+        "target": "目标值",
+        "basis": "目标依据"
+      },
+      "quality": {
+        "input_rows": 24,
+        "valid_rows": 24,
+        "rejected_rows": 0,
+        "duplicate_participants": 0,
+        "blocking": false,
+        "key_fields": [
+          "store",
+          "sku",
+          "metric",
+          "start",
+          "end"
+        ]
+      },
+      "file_sha256": "24745ff8fb74e4ddc9361f8d9b777d4f925aad87632e737112795b65d8c04adc",
+      "created_at": "2026-10-24T05:54:12.641061+00:00",
+      "contract_version": "retail-review-2.0",
+      "artifact_sha256": {
+        "original": "24745ff8fb74e4ddc9361f8d9b777d4f925aad87632e737112795b65d8c04adc",
+        "normalized": "4ffe604ff9d86985a25d713b8df01c5f5e5b98f26ced12157f779affa8fcee45",
+        "diagnostics": "3659ba3fb558cec1fd6dc8f8732ce9396d7497be8b15d967052e0cb766b77a9f"
+      }
+    },
+    "operations": {
+      "id": "8d333892a5314f59bacdbd3951edbd65",
+      "name": "模拟 · 三周日运营",
+      "filename": "两店日运营.csv",
+      "kind": "operations",
+      "source": "明确模拟：项目生成的三表业务演示，非商家业绩、预算或实际可售记录。",
+      "currency": "元",
+      "mapping": {
+        "date": "日期",
+        "store": "门店ID",
+        "sku": "商品SKU",
+        "open_minutes": "营业分钟",
+        "unavailable_minutes": "不可售分钟",
+        "reason": "原因",
+        "source_note": "来源备注"
+      },
+      "quality": {
+        "input_rows": 167,
+        "valid_rows": 167,
+        "rejected_rows": 0,
+        "duplicate_participants": 0,
+        "blocking": false,
+        "key_fields": [
+          "date",
+          "store",
+          "sku"
+        ]
+      },
+      "file_sha256": "cb6a536d383ed20c38f85ac4e56a164213e298906ea9dc2a83e30b16f2307d5d",
+      "created_at": "2026-10-24T05:54:12.663257+00:00",
+      "contract_version": "retail-review-2.0",
+      "artifact_sha256": {
+        "original": "cb6a536d383ed20c38f85ac4e56a164213e298906ea9dc2a83e30b16f2307d5d",
+        "normalized": "e78764da52e3cd2c9f755c6da1a8d0c9894d8fe8451da33cc5b09b44c7964dfe",
+        "diagnostics": "122a9eb9ca1f61a372f55c960f89e093f228d271a40ef0a2da879ac6ec8ea7a4"
+      }
+    }
+  },
+  "rows": [
+    {
+      "store": "S01",
+      "sku": "LATTE",
+      "name": "经典拿铁",
+      "names": [
+        "拿铁咖啡",
+        "经典拿铁"
+      ],
+      "actual_cents": 31200,
+      "target_cents": 50000,
+      "difference_cents": -18800,
+      "shortfall_cents": 18800,
+      "attainment": 62.4,
+      "status": "shortfall",
+      "previous_cents": 52000,
+      "period_change_cents": -20800,
+      "current": {
+        "net_cents": 31200,
+        "positive_cents": 36400,
+        "negative_cents": -5200,
+        "positive_quantity": "14",
+        "negative_quantity": "2",
+        "weighted_positive_price": "26.00",
+        "orders": 7,
+        "records": 15
+      },
+      "previous": {
+        "net_cents": 52000,
+        "positive_cents": 54600,
+        "negative_cents": -2600,
+        "positive_quantity": "21",
+        "negative_quantity": "1",
+        "weighted_positive_price": "26.00",
+        "orders": 14,
+        "records": 22
+      },
+      "target_row": 11,
+      "target_basis": "项目构造的周计划，用于验收；非真实预算",
+      "operations": {
+        "observed_days": 6,
+        "calendar_days": 7,
+        "missing_days": [
+          "2026-09-24"
+        ],
+        "open_minutes": 3600,
+        "unavailable_minutes": 180,
+        "closed_sale_dates": []
+      },
+      "evidence_id": "E5"
+    },
+    {
+      "store": "S01",
+      "sku": "AMERICANO",
+      "name": "美式咖啡",
+      "names": [
+        "美式咖啡"
+      ],
+      "actual_cents": 50400,
+      "target_cents": 42000,
+      "difference_cents": 8400,
+      "shortfall_cents": 0,
+      "attainment": 120.0,
+      "status": "met",
+      "previous_cents": 37800,
+      "period_change_cents": 12600,
+      "current": {
+        "net_cents": 50400,
+        "positive_cents": 50400,
+        "negative_cents": 0,
+        "positive_quantity": "28",
+        "negative_quantity": "0",
+        "weighted_positive_price": "18.00",
+        "orders": 14,
+        "records": 28
+      },
+      "previous": {
+        "net_cents": 37800,
+        "positive_cents": 37800,
+        "negative_cents": 0,
+        "positive_quantity": "21",
+        "negative_quantity": "0",
+        "weighted_positive_price": "18.00",
+        "orders": 14,
+        "records": 21
+      },
+      "target_row": 10,
+      "target_basis": "项目构造的周计划，用于验收；非真实预算",
+      "operations": {
+        "observed_days": 7,
+        "calendar_days": 7,
+        "missing_days": [],
+        "open_minutes": 4200,
+        "unavailable_minutes": 0,
+        "closed_sale_dates": []
+      },
+      "evidence_id": "E6"
+    },
+    {
+      "store": "S01",
+      "sku": "CAKE",
+      "name": "芝士蛋糕",
+      "names": [
+        "芝士蛋糕"
+      ],
+      "actual_cents": 46200,
+      "target_cents": 38000,
+      "difference_cents": 8200,
+      "shortfall_cents": 0,
+      "attainment": 121.578947,
+      "status": "met",
+      "previous_cents": 46200,
+      "period_change_cents": 0,
+      "current": {
+        "net_cents": 46200,
+        "positive_cents": 46200,
+        "negative_cents": 0,
+        "positive_quantity": "21",
+        "negative_quantity": "0",
+        "weighted_positive_price": "22.00",
+        "orders": 14,
+        "records": 21
+      },
+      "previous": {
+        "net_cents": 46200,
+        "positive_cents": 46200,
+        "negative_cents": 0,
+        "positive_quantity": "21",
+        "negative_quantity": "0",
+        "weighted_positive_price": "22.00",
+        "orders": 14,
+        "records": 21
+      },
+      "target_row": 13,
+      "target_basis": "项目构造的周计划，用于验收；非真实预算",
+      "operations": {
+        "observed_days": 7,
+        "calendar_days": 7,
+        "missing_days": [],
+        "open_minutes": 4200,
+        "unavailable_minutes": 0,
+        "closed_sale_dates": []
+      },
+      "evidence_id": "E7"
+    },
+    {
+      "store": "S01",
+      "sku": "TEA",
+      "name": "柠檬茶",
+      "names": [
+        "柠檬茶"
+      ],
+      "actual_cents": 33600,
+      "target_cents": 20000,
+      "difference_cents": 13600,
+      "shortfall_cents": 0,
+      "attainment": 168.0,
+      "status": "met",
+      "previous_cents": 33600,
+      "period_change_cents": 0,
+      "current": {
+        "net_cents": 33600,
+        "positive_cents": 33600,
+        "negative_cents": 0,
+        "positive_quantity": "21",
+        "negative_quantity": "0",
+        "weighted_positive_price": "16.00",
+        "orders": 14,
+        "records": 21
+      },
+      "previous": {
+        "net_cents": 33600,
+        "positive_cents": 33600,
+        "negative_cents": 0,
+        "positive_quantity": "21",
+        "negative_quantity": "0",
+        "weighted_positive_price": "16.00",
+        "orders": 14,
+        "records": 21
+      },
+      "target_row": 12,
+      "target_basis": "项目构造的周计划，用于验收；非真实预算",
+      "operations": {
+        "observed_days": 7,
+        "calendar_days": 7,
+        "missing_days": [],
+        "open_minutes": 4200,
+        "unavailable_minutes": 0,
+        "closed_sale_dates": []
+      },
+      "evidence_id": "E8"
+    },
+    {
+      "store": "S02",
+      "sku": "AMERICANO",
+      "name": "美式咖啡",
+      "names": [
+        "美式咖啡"
+      ],
+      "actual_cents": 37800,
+      "target_cents": 34000,
+      "difference_cents": 3800,
+      "shortfall_cents": 0,
+      "attainment": 111.176471,
+      "status": "met",
+      "previous_cents": 25200,
+      "period_change_cents": 12600,
+      "current": {
+        "net_cents": 37800,
+        "positive_cents": 37800,
+        "negative_cents": 0,
+        "positive_quantity": "21",
+        "negative_quantity": "0",
+        "weighted_positive_price": "18.00",
+        "orders": 14,
+        "records": 21
+      },
+      "previous": {
+        "net_cents": 25200,
+        "positive_cents": 25200,
+        "negative_cents": 0,
+        "positive_quantity": "14",
+        "negative_quantity": "0",
+        "weighted_positive_price": "18.00",
+        "orders": 7,
+        "records": 14
+      },
+      "target_row": 14,
+      "target_basis": "项目构造的周计划，用于验收；非真实预算",
+      "operations": {
+        "observed_days": 7,
+        "calendar_days": 7,
+        "missing_days": [],
+        "open_minutes": 4200,
+        "unavailable_minutes": 0,
+        "closed_sale_dates": []
+      },
+      "evidence_id": "E9"
+    },
+    {
+      "store": "S02",
+      "sku": "CAKE",
+      "name": "芝士蛋糕",
+      "names": [
+        "芝士蛋糕"
+      ],
+      "actual_cents": 28600,
+      "target_cents": 27000,
+      "difference_cents": 1600,
+      "shortfall_cents": 0,
+      "attainment": 105.925926,
+      "status": "met",
+      "previous_cents": 30800,
+      "period_change_cents": -2200,
+      "current": {
+        "net_cents": 28600,
+        "positive_cents": 30800,
+        "negative_cents": -2200,
+        "positive_quantity": "14",
+        "negative_quantity": "1",
+        "weighted_positive_price": "22.00",
+        "orders": 14,
+        "records": 15
+      },
+      "previous": {
+        "net_cents": 30800,
+        "positive_cents": 30800,
+        "negative_cents": 0,
+        "positive_quantity": "14",
+        "negative_quantity": "0",
+        "weighted_positive_price": "22.00",
+        "orders": 7,
+        "records": 14
+      },
+      "target_row": 17,
+      "target_basis": "项目构造的周计划，用于验收；非真实预算",
+      "operations": {
+        "observed_days": 7,
+        "calendar_days": 7,
+        "missing_days": [],
+        "open_minutes": 4200,
+        "unavailable_minutes": 0,
+        "closed_sale_dates": []
+      },
+      "evidence_id": "E10"
+    },
+    {
+      "store": "S02",
+      "sku": "LATTE",
+      "name": "经典拿铁",
+      "names": [
+        "拿铁咖啡",
+        "经典拿铁"
+      ],
+      "actual_cents": 36400,
+      "target_cents": 35000,
+      "difference_cents": 1400,
+      "shortfall_cents": 0,
+      "attainment": 104.0,
+      "status": "met",
+      "previous_cents": 36400,
+      "period_change_cents": 0,
+      "current": {
+        "net_cents": 36400,
+        "positive_cents": 36400,
+        "negative_cents": 0,
+        "positive_quantity": "14",
+        "negative_quantity": "0",
+        "weighted_positive_price": "26.00",
+        "orders": 14,
+        "records": 14
+      },
+      "previous": {
+        "net_cents": 36400,
+        "positive_cents": 36400,
+        "negative_cents": 0,
+        "positive_quantity": "14",
+        "negative_quantity": "0",
+        "weighted_positive_price": "26.00",
+        "orders": 7,
+        "records": 14
+      },
+      "target_row": 15,
+      "target_basis": "项目构造的周计划，用于验收；非真实预算",
+      "operations": {
+        "observed_days": 7,
+        "calendar_days": 7,
+        "missing_days": [],
+        "open_minutes": 4200,
+        "unavailable_minutes": 0,
+        "closed_sale_dates": []
+      },
+      "evidence_id": "E11"
+    },
+    {
+      "store": "S02",
+      "sku": "TEA",
+      "name": "柠檬茶",
+      "names": [
+        "柠檬茶"
+      ],
+      "actual_cents": 22400,
+      "target_cents": 20000,
+      "difference_cents": 2400,
+      "shortfall_cents": 0,
+      "attainment": 112.0,
+      "status": "met",
+      "previous_cents": 22400,
+      "period_change_cents": 0,
+      "current": {
+        "net_cents": 22400,
+        "positive_cents": 22400,
+        "negative_cents": 0,
+        "positive_quantity": "14",
+        "negative_quantity": "0",
+        "weighted_positive_price": "16.00",
+        "orders": 14,
+        "records": 14
+      },
+      "previous": {
+        "net_cents": 22400,
+        "positive_cents": 22400,
+        "negative_cents": 0,
+        "positive_quantity": "14",
+        "negative_quantity": "0",
+        "weighted_positive_price": "16.00",
+        "orders": 7,
+        "records": 14
+      },
+      "target_row": 16,
+      "target_basis": "项目构造的周计划，用于验收；非真实预算",
+      "operations": {
+        "observed_days": 7,
+        "calendar_days": 7,
+        "missing_days": [],
+        "open_minutes": 4200,
+        "unavailable_minutes": 0,
+        "closed_sale_dates": []
+      },
+      "evidence_id": "E12"
+    }
+  ],
+  "facts": [
+    {
+      "id": "E1",
+      "label": "本期有效记录净交易额",
+      "value": 2866.0,
+      "unit": "currency"
+    },
+    {
+      "id": "E2",
+      "label": "同范围计划目标",
+      "value": 2660.0,
+      "unit": "currency"
+    },
+    {
+      "id": "E3",
+      "label": "实际减目标",
+      "value": 206.0,
+      "unit": "currency"
+    },
+    {
+      "id": "E4",
+      "label": "整体目标达成率",
+      "value": 107.744361,
+      "unit": "percent"
+    },
+    {
+      "id": "E5",
+      "label": "S01/LATTE 经典拿铁实际减目标",
+      "value": -188.0,
+      "unit": "currency"
+    },
+    {
+      "id": "E6",
+      "label": "S01/AMERICANO 美式咖啡实际减目标",
+      "value": 84.0,
+      "unit": "currency"
+    },
+    {
+      "id": "E7",
+      "label": "S01/CAKE 芝士蛋糕实际减目标",
+      "value": 82.0,
+      "unit": "currency"
+    },
+    {
+      "id": "E8",
+      "label": "S01/TEA 柠檬茶实际减目标",
+      "value": 136.0,
+      "unit": "currency"
+    },
+    {
+      "id": "E9",
+      "label": "S02/AMERICANO 美式咖啡实际减目标",
+      "value": 38.0,
+      "unit": "currency"
+    },
+    {
+      "id": "E10",
+      "label": "S02/CAKE 芝士蛋糕实际减目标",
+      "value": 16.0,
+      "unit": "currency"
+    },
+    {
+      "id": "E11",
+      "label": "S02/LATTE 经典拿铁实际减目标",
+      "value": 14.0,
+      "unit": "currency"
+    },
+    {
+      "id": "E12",
+      "label": "S02/TEA 柠檬茶实际减目标",
+      "value": 24.0,
+      "unit": "currency"
+    }
+  ],
+  "totals": {
+    "net_cents": 286600,
+    "positive_cents": 294000,
+    "negative_cents": -7400,
+    "positive_quantity": "147",
+    "negative_quantity": "3",
+    "weighted_positive_price": "20.00",
+    "orders": 77,
+    "records": 149,
+    "actual_cents": 286600,
+    "target_cents": 266000,
+    "difference_cents": 20600,
+    "attainment": 107.744361,
+    "evaluable_categories": 8,
+    "met_categories": 7,
+    "categories": 8
+  },
+  "readiness": {
+    "can_evaluate": true,
+    "overall_target_complete": true,
+    "blockers": [],
+    "warnings": [
+      "部分运营日期缺失，不可售记录只能作已知线索，缺失日保留未知。"
+    ],
+    "controls": {
+      "before_join_cents": 286600,
+      "after_grain_alignment_cents": 286600,
+      "reconciled": true
+    }
+  },
+  "currency": "元",
+  "notices": [
+    "目标为提供的计划，不是预测。不可售记录与指标同屏不证明因果，也不能据此估算损失。",
+    "完整交接确认是人工声明，不等于机器证明业务真实性。",
+    "部分运营日期缺失，不可售记录只能作已知线索，缺失日保留未知。"
+  ],
+  "source": "明确模拟：项目生成的三表业务演示，非商家业绩、预算或实际可售记录。；明确模拟：项目生成的三表业务演示，非商家业绩、预算或实际可售记录。；明确模拟：项目生成的三表业务演示，非商家业绩、预算或实际可售记录。",
+  "id": "118d2f2a2153ab20b41a6bbdfb9a45dd",
+  "created_at": "2026-10-24T05:54:12.776663+00:00",
+  "parent_review_id": "a34ae4e4c932457f816cda9f0e51656c",
+  "report": {
+    "facts_note": "模拟：本期净交易额2866元，目标2660元；八组中七组达标。",
+    "hypothesis": "可能与可售情况或交易数量变化有关，尚需核查，不能认定因果。",
+    "next_check": "逐一核对南门拿铁交易、目标依据及缺失运营日。"
+  }
+}
