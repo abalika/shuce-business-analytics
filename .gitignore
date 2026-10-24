@@ -15,3 +15,10 @@ __pycache__/
 *.zip
 .DS_Store
 Thumbs.db
+outputs/*
+!outputs/offline-demo-v2.5.0/
+!outputs/closeout-acceptance-v2.5.0/
+!outputs/最终公开审查-v2.5.md
+!outputs/manual-verification-v2.5.json
+!outputs/privacy-scan-v2.5.json
+!outputs/closeout-acceptance-v2.5.0/*.log
