@@ -51,6 +51,8 @@ initialize()
 from .version import VERSION
 
 app = FastAPI(title="数策 · 可复核业务分析", version=VERSION)
+from .model_settings import router as model_settings_router
+app.include_router(model_settings_router)
 
 
 @app.middleware("http")

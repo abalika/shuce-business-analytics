@@ -19,7 +19,7 @@ from verify_package import allowed,verify,ROOT_FILES,FOLDERS
 def package(destination):
     destination=destination.resolve()
     if destination.exists(): raise ValueError('Destination already exists; use a new filename')
-    if VERSION!='2.5.0': raise ValueError('Update the package contract for the new version')
+    if VERSION!='2.6.0': raise ValueError('Update the package contract for the new version')
     from dotenv import dotenv_values
     credentials=[]
     env_files=[ROOT/'.env']

@@ -2,7 +2,7 @@
 
 把销售明细、经营目标与日运营记录，整理成有口径、有证据、可交接的门店经营复盘。
 
-**v2.5.0 · Windows / Python 3.12 · FastAPI / pandas / SQLite / 原生 JavaScript**
+**v2.6.0 · Windows / Python 3.12 · FastAPI / pandas / SQLite / 原生 JavaScript**
 
 面向本地经营复盘与业务分析演示，使用 AI 辅助开发。演示数据全部由项目生成；公开证据区分工程测试、历史界面检查与真实业务验证。
 
@@ -10,9 +10,9 @@
 
 ![两店经营复盘界面](docs/assets/review-desktop.png)
 
-*历史界面截图：2026-10-20、v2.3.1、模拟业务；不是本轮实时模型结果或新的浏览器验收。当前发布版新增错误恢复、重复保存保护与可复现评测，保留原有布局。*
+*历史界面截图：2026-10-20、v2.3.1、模拟业务；不是本轮实时模型结果或新的浏览器验收。当前发布版保留原有布局，并新增网页模型设置；历史截图不包含新弹窗。*
 
-无需安装：下载仓库或 [Release 交付包](https://github.com/abalika/shuce-business-analytics/releases)，打开 `outputs/offline-demo-v2.5.0/index.html`。里面有独立 HTML 报告、Excel、JSON、三张源表和三类证据 CSV。它们明确标注“预置演示数据 / 非实时”，静态报告不会重新计算。
+无需安装：下载仓库或 [Release 交付包](https://github.com/abalika/shuce-business-analytics/releases)，打开 `outputs/offline-demo-v2.6.0/index.html`。里面有独立 HTML 报告、Excel、JSON、三张源表和三类证据 CSV。它们明确标注“预置演示数据 / 非实时”，静态报告不会重新计算。
 
 ## 解决什么问题
 
@@ -49,7 +49,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/stop.ps1
 
 `/explore` 的自然语言问数会被转换为受限工具参数；代码负责实际计算。AI 证据摘要需结构与引用校验，仍不能证明解释或因果成立。
 
-普通模式可按 `.env.example` 配置兼容 Chat Completions 的服务；密钥只在后端。离线模式强制忽略全部模型配置，明确显示规则计算，不返回伪造 AI 输出。未配置、超时、限流、认证失败均有明确状态与恢复路径。
+普通模式点击页面右上角“模型设置”，填写兼容 Chat Completions 的 API 地址、模型 ID 和 API Key；可先测试连接，再保存立即使用，无需编辑文件或重启。默认仅本次运行生效，勾选“记住到本机”才会写入本项目 `.env`（明文，请勿共享）。密钥不回显、不写浏览器本地存储、不进入公开仓库；更换服务地址须重新填写对应密钥。仍支持 `.env.example` 的手工配置方式。离线模式强制忽略全部模型配置，明确显示规则计算，不返回伪造 AI 输出。未配置、超时、限流、认证失败均有明确状态与恢复路径。
+
+连接测试仅发送一条不含业务数据的小请求，可能产生少量费用；测试不会自动保存配置。离线模式下设置与测试均禁用，请先停止离线服务，再用 `启动数策.cmd` 进入普通模式。
 
 ## 可复现验证
 
@@ -70,7 +72,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/stop.ps1
 
 题集与断言执行器均记录 SHA256。输出通过率、失败分类、逐题/总耗时、时间、Git commit/dirty、成本、模型 ID/参数与上次对比。本版评测是**离线规则与确定性计算**，模型 ID/参数为 null、API 请求和 API 费用为 0，不宣称真实模型准确率；真实 API 的故障处理由替身注入验证。
 
-- [最终审查与验收证据](outputs/最终公开审查-v2.5.md)
+- [最终审查与验收证据](outputs/最终公开审查-v2.6.md)
 - [用户手册：5 分钟上手、FAQ、10 分钟演示讲稿](docs/用户手册.md)
 - [部署与评测](docs/部署与评测.md) / [错误矩阵](docs/错误处理矩阵.md)
 - [架构与设计取舍](docs/架构与设计.md) / [备份与回退](docs/回退说明.md)

@@ -22,3 +22,12 @@ outputs/*
 !outputs/manual-verification-v2.5.json
 !outputs/privacy-scan-v2.5.json
 !outputs/closeout-acceptance-v2.5.0/*.log
+
+.env-*
+
+!outputs/offline-demo-v2.6.0/
+!outputs/closeout-acceptance-v2.6.0/
+!outputs/最终公开审查-v2.6.md
+!outputs/manual-verification-v2.6.json
+!outputs/privacy-scan-v2.6.json
+!outputs/closeout-acceptance-v2.6.0/*.log

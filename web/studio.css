@@ -258,3 +258,5 @@ footer { color: var(--muted); font-size: 10px; letter-spacing: .7px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; scroll-behavior: auto !important; }
 }
+
+.model-settings-dialog{width:min(620px,calc(100vw - 28px));max-height:90vh;overflow:auto}.model-settings-dialog label{display:block;margin-top:14px}.model-settings-dialog .handover{display:flex}.model-settings-dialog .settings-error{color:#a13727}.model-settings-dialog .actions{flex-wrap:wrap}.topbar-right{gap:12px;flex-wrap:wrap}@media(max-width:680px){.model-settings-dialog .actions button{flex:1 1 auto}.topbar{gap:8px;flex-wrap:wrap}}

@@ -21,6 +21,10 @@ if os.getenv('SHUCE_OFFLINE') != '1' and pointer.exists():
 def config():
     if os.getenv('SHUCE_OFFLINE') == '1':
         return {'key': '', 'base': '', 'model': ''}
+    from .model_settings import runtime_override
+    current=runtime_override()
+    if current is not None:
+        return current
     return {"key": os.getenv("OPENAI_API_KEY", "").strip(), "base": os.getenv("OPENAI_BASE_URL", "").strip().rstrip("/"), "model": os.getenv("OPENAI_MODEL", "").strip()}
 
 
@@ -28,7 +32,8 @@ def status():
     c = config()
     if os.getenv('SHUCE_OFFLINE') == '1':
         return {'configured': False, 'model': '', 'offline': True, 'mode': '离线演示：规则规划＋确定性计算；不请求模型'}
-    return {"configured": bool(c["key"] and c["base"] and c["model"]), "model": c["model"] if c["key"] else "", "mode": "模型规划＋确定性计算" if c["key"] and c["base"] and c["model"] else "规则演示（尚未配置模型）"}
+    safe_model=c['model'] if c['key'] and c['model']!=c['key'] and not (len(c['key'])>=8 and c['key'] in c['model']) else ''
+    return {"configured": bool(c["key"] and c["base"] and safe_model), "model": safe_model, "mode": "模型规划＋确定性计算" if c["key"] and c["base"] and safe_model else "规则演示（尚未配置模型）"}
 
 
 class ModelError(AnalysisError):
