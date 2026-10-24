@@ -4,7 +4,7 @@
 
 **v2.5.0 · Windows / Python 3.12 · FastAPI / pandas / SQLite / 原生 JavaScript**
 
-适合业务分析、AI 应用和产品方向的作品展示。演示数据全部由项目生成，不是真实商家业绩；AI 辅助实现，自动化验证不等于作者已独立掌握全部技术，也不代表企业试用或业务收益。
+面向本地经营复盘与业务分析演示，使用 AI 辅助开发。演示数据全部由项目生成；公开证据区分工程测试、历史界面检查与真实业务验证。
 
 ## 先看成果
 
@@ -12,7 +12,7 @@
 
 *历史界面截图：2026-10-20、v2.3.1、模拟业务；不是本轮实时模型结果或新的浏览器验收。当前发布版新增错误恢复、重复保存保护与可复现评测，保留原有布局。*
 
-无需安装：下载仓库或 [Release 交付包](../../releases)，打开 `outputs/offline-demo-v2.5.0/index.html`。里面有独立 HTML 报告、Excel、JSON、三张源表和三类证据 CSV。它们明确标注“预置演示数据 / 非实时”，静态报告不会重新计算。
+无需安装：下载仓库或 [Release 交付包](https://github.com/abalika/shuce-business-analytics/releases)，打开 `outputs/offline-demo-v2.5.0/index.html`。里面有独立 HTML 报告、Excel、JSON、三张源表和三类证据 CSV。它们明确标注“预置演示数据 / 非实时”，静态报告不会重新计算。
 
 ## 解决什么问题
 

@@ -9,7 +9,7 @@ import zipfile
 
 FOLDERS = {'app','web','tests','sql','examples','scripts','docs','design-system','licenses','.github'}
 ROOT_FILES = {'README.md','AGENTS.md','HANDOFF.md','requirements.txt','requirements.lock.txt',
-              '.gitignore','.env.example','启动数策.cmd','停止数策.cmd','离线演示.cmd','数据维护.cmd',
+              '.gitignore','.gitattributes','.env.example','启动数策.cmd','停止数策.cmd','离线演示.cmd','数据维护.cmd',
               'LICENSE','CHANGELOG.md','SECURITY.md','CONTRIBUTING.md'}
 EVIDENCE = {'outputs/最终公开审查-v2.5.md','outputs/manual-verification-v2.5.json',
             'outputs/privacy-scan-v2.5.json'}
