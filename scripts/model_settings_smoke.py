@@ -45,8 +45,9 @@ def smoke(project,output):
         if not condition:raise ValueError(label)
         checks.append(label)
     def ps(script,*args):
+        env={key:value for key,value in os.environ.items() if key not in {'OPENAI_API_KEY','OPENAI_BASE_URL','OPENAI_MODEL','SHUCE_OFFLINE'}}
         result=subprocess.run(['powershell.exe','-NoProfile','-ExecutionPolicy','Bypass','-File',str(project/'scripts'/script),*map(str,args)],
-            cwd=project,env={**os.environ,'PYTHONIOENCODING':'utf-8'},capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=50)
+            cwd=project,env={**env,'PYTHONIOENCODING':'utf-8'},capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=50)
         if result.returncode:raise ValueError('Service command failed: '+script)
     def start():ps('launch.ps1','-NoBrowser','-Port',port,'-DataDir',data)
     def stop():ps('stop.ps1','-Port',port)

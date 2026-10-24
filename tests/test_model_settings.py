@@ -215,3 +215,12 @@ def test_legacy_misconfigured_fields_cannot_echo_the_secret(client,monkeypatch):
     response=client.get('/api/model-settings')
     assert SECRET not in response.text and response.json()['model']=='' and response.json()['base_url']==''
     assert SECRET not in client.get('/api/status').text
+
+
+def test_remembered_key_roundtrips_literally_without_env_interpolation(client,monkeypatch):
+    special="fixture-${SETTINGS_NOT_REAL_VARIABLE}-'quoted'"
+    monkeypatch.setenv('SETTINGS_NOT_REAL_VARIABLE','must-not-expand')
+    response=client.post('/api/model-settings',json=body(api_key=special,remember=True))
+    assert response.status_code==200 and special not in response.text
+    monkeypatch.setattr(settings,'_override',None)
+    assert ai.config()['key']==special

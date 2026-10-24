@@ -32,7 +32,7 @@ def runtime_override():
     global _override,_source
     with _lock:
         if _override is None and not offline() and ENV_FILE.is_file():
-            values=dotenv_values(ENV_FILE)
+            values=dotenv_values(ENV_FILE,interpolate=False)
             if values.get('SHUCE_MODEL_MANAGED')=='1':
                 _override={'key':values.get('OPENAI_API_KEY') or '',
                            'base':values.get('OPENAI_BASE_URL') or '',

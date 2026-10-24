@@ -28,8 +28,9 @@ def scan(paths, private_envs=(), deny_list=None):
     from dotenv import dotenv_values
     private=[]
     for env in private_envs:
-        private += [value.encode() for key,value in dotenv_values(env).items()
-                    if value and len(value)>=12 and any(word in key.upper() for word in ('KEY','TOKEN','SECRET','PASSWORD'))]
+        for interpolate in (False,True):
+            private += [value.encode() for key,value in dotenv_values(env,interpolate=interpolate).items()
+                        if value and len(value)>=12 and any(word in key.upper() for word in ('KEY','TOKEN','SECRET','PASSWORD'))]
     if deny_list:
         private += [value.encode() for value in json.loads(deny_list.read_text(encoding='utf-8-sig')) if value]
     findings=[]

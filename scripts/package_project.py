@@ -27,7 +27,8 @@ def package(destination):
     if pointer.is_file(): env_files.append(Path(pointer.read_text(encoding='utf-8-sig').strip()))
     for env_file in env_files:
         if env_file.is_file():
-            credentials += [v.encode() for k,v in dotenv_values(env_file).items() if v and ('KEY' in k or 'TOKEN' in k or 'SECRET' in k) and len(v)>=12]
+            for interpolate in (False,True):
+                credentials += [v.encode() for k,v in dotenv_values(env_file,interpolate=interpolate).items() if v and ('KEY' in k or 'TOKEN' in k or 'SECRET' in k) and len(v)>=12]
     if len(os.getenv('OPENAI_API_KEY',''))>=12: credentials.append(os.environ['OPENAI_API_KEY'].encode())
     candidates=[ROOT/name for name in ROOT_FILES if (ROOT/name).is_file()]
     for folder in (*sorted(FOLDERS),'outputs'):
