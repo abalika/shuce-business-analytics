@@ -1,5 +1,7 @@
 """Local artifact integrity; detects accidental changes, not a signed trust boundary."""
+from contextlib import contextmanager
 import hashlib
+import logging
 import re
 from pathlib import Path
 from .engine import AnalysisError
@@ -17,6 +19,25 @@ def artifact_paths(data, meta, review=False):
     return {'original': Path(data) / (stem + '.raw'),
             'normalized': Path(data) / (stem + '.csv.gz'),
             'diagnostics': Path(data) / (stem + '-diagnostics.csv.gz')}
+
+
+@contextmanager
+def write_import_artifacts(data, meta, frame, diagnostics, blob, *, review=False):
+    """Remove artifacts from a failed import, including when registration fails."""
+    paths = artifact_paths(data, meta, review)
+    try:
+        frame.to_csv(paths['normalized'], index=False, compression='gzip')
+        diagnostics.to_csv(paths['diagnostics'], index=False, compression='gzip')
+        paths['original'].write_bytes(blob)
+        meta['artifact_sha256'] = fingerprints(data, meta, review)
+        yield
+    except Exception:
+        for path in paths.values():
+            try:
+                path.unlink(missing_ok=True)
+            except OSError:
+                logging.getLogger('shuce').warning('import_artifact_cleanup_failed')
+        raise
 
 
 def file_hash(path):

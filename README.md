@@ -2,7 +2,7 @@
 
 把销售明细、经营目标与日运营记录，整理成有口径、有证据、可交接的门店经营复盘。
 
-**v2.6.0 · Windows / Python 3.12 · FastAPI / pandas / SQLite / 原生 JavaScript**
+**v2.7.0 · Windows / Python 3.12 · FastAPI / pandas / SQLite / 原生 JavaScript**
 
 面向本地经营复盘与业务分析演示，使用 AI 辅助开发。演示数据全部由项目生成；公开证据区分工程测试、历史界面检查与真实业务验证。
 
@@ -10,9 +10,9 @@
 
 ![两店经营复盘界面](docs/assets/review-desktop.png)
 
-*历史界面截图：2026-10-20、v2.3.1、模拟业务；不是本轮实时模型结果或新的浏览器验收。当前发布版保留原有布局，并新增网页模型设置；历史截图不包含新弹窗。*
+*界面截图摄于 2026-10-20，使用 v2.3.1 和项目模拟数据。*
 
-无需安装：下载仓库或 [Release 交付包](https://github.com/abalika/shuce-business-analytics/releases)，打开 `outputs/offline-demo-v2.6.0/index.html`。里面有独立 HTML 报告、Excel、JSON、三张源表和三类证据 CSV。它们明确标注“预置演示数据 / 非实时”，静态报告不会重新计算。
+无需安装：下载仓库或 [Release 交付包](https://github.com/abalika/shuce-business-analytics/releases)，打开 `outputs/offline-demo-v2.7.0/index.html`。里面有独立 HTML 报告、Excel、JSON、三张源表和三类证据 CSV。它们明确标注“预置演示数据 / 非实时”，静态报告不会重新计算。
 
 ## 解决什么问题
 
@@ -37,7 +37,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/setup.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/launch.ps1 -Offline
 ```
 
-访问 `http://127.0.0.1:8765`，点击“两店完整演示”。停止：
+访问 `http://127.0.0.1:8765`，点击「查看两店模拟演示」。停止：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/stop.ps1
@@ -72,7 +72,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/stop.ps1
 
 题集与断言执行器均记录 SHA256。输出通过率、失败分类、逐题/总耗时、时间、Git commit/dirty、成本、模型 ID/参数与上次对比。本版评测是**离线规则与确定性计算**，模型 ID/参数为 null、API 请求和 API 费用为 0，不宣称真实模型准确率；真实 API 的故障处理由替身注入验证。
 
-- [最终审查与验收证据](outputs/最终公开审查-v2.6.md)
+- [最终审查与验收证据](outputs/最终公开审查-v2.7.md)
 - [用户手册：5 分钟上手、FAQ、10 分钟演示讲稿](docs/用户手册.md)
 - [部署与评测](docs/部署与评测.md) / [错误矩阵](docs/错误处理矩阵.md)
 - [架构与设计取舍](docs/架构与设计.md) / [备份与回退](docs/回退说明.md)
@@ -80,7 +80,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/stop.ps1
 
 ## 真实 API 小样本验证
 
-2026-10-24，经明确授权，通过新设置接口连接 `cn:deepseek-v4.1-flash`，连接检查、模拟数据问数（3310元）及证据摘要校验通过，共3次真实模型请求。密钥仅在独立测试服务内存中使用，未落盘，测试后服务关闭。该小样本不代表通用准确率；金额成本未由网关返回，记为未知。[脱敏测试记录](outputs/real-model-settings-v2.6.json)。
+2026-11-10，`cn:deepseek-v4.1-flash` 在模拟数据上通过 8 项检查，覆盖连接、五道单表问数、三表摘要与报告重开、利润守卫。12 次真实请求全部返回 HTTP 200，网关报告 6,876 tokens，费用未知。数值由代码计算并与原表或独立 SQL 核对；模型摘要通过证据引用与结构校验。[脱敏逐项记录](outputs/real-model-v2.7.json)
 
 ## 范围
 

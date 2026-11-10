@@ -83,12 +83,22 @@ def normalize_source(raw,kind,mapping):
 
 
 def money(group):
-    def qty(sign):return str(sum((Decimal(str(r.quantity)) for r in group.itertuples() if (Decimal(str(r.quantity))>0)==sign),Decimal(0)))
     positive=int(group.positive_amount.sum());negative=int(group.negative_amount.sum())
-    positive_rows=group[group.amount>0]
-    positive_quantity=qty(True)
-    price=str((Decimal(positive)/100/Decimal(positive_quantity)).quantize(Decimal('.01'),rounding=ROUND_HALF_UP)) if Decimal(positive_quantity)>0 else None
-    return {'net_cents':positive+negative,'positive_cents':positive,'negative_cents':negative,'positive_quantity':positive_quantity,'negative_quantity':str(-Decimal(qty(False))),'weighted_positive_price':price,'orders':len(set(zip(positive_rows.store,positive_rows.order))),'records':len(group)}
+    positive_quantity = negative_quantity = Decimal(0)
+    orders = set()
+    for quantity, store, order, cents in zip(group.quantity, group.store, group.order, group.amount):
+        quantity = Decimal(str(quantity))
+        if quantity > 0:
+            positive_quantity += quantity
+        else:
+            negative_quantity += quantity
+        if cents > 0:
+            orders.add((store, order))
+    price = (Decimal(positive)/100/positive_quantity).quantize(Decimal('.01'),rounding=ROUND_HALF_UP) if positive_quantity else None
+    return {'net_cents':positive+negative,'positive_cents':positive,'negative_cents':negative,
+            'positive_quantity':str(positive_quantity),'negative_quantity':str(-negative_quantity),
+            'weighted_positive_price':str(price) if price is not None else None,
+            'orders':len(orders),'records':len(group)}
 
 
 def build_review(sources,frames,task):
@@ -128,16 +138,20 @@ def build_review(sources,frames,task):
     # A file may contain later cycles; future labels must not leak into this review.
     labels_by_key={key:g['name'].drop_duplicates().tolist() for key,g in s[s.date<=end].sort_values('date').groupby(['store','sku'])}
     rows=[]
+    no_sales = s.iloc[:0]
+    no_operations = o.iloc[:0]
     for key in keys:
-        g=cg.get(key,s.iloc[:0]);prior=pg.get(key,s.iloc[:0]);total=money(g);old=money(prior)
+        g=cg.get(key,no_sales);prior=pg.get(key,no_sales);total=money(g);old=money(prior)
         actual=(total['net_cents'] if metric=='amount' else total['positive_cents']) if len(g) or (task.get('confirmed_complete') and valid_sales) else None
         prior_value=(old['net_cents'] if metric=='amount' else old['positive_cents']) if ps and len(prior) else None
         target=target_map.get(key);target_cents=int(target['target_cents']) if target else None
         change=actual-target_cents if actual is not None and target_cents is not None and not blockers and task.get('confirmed_complete') else None
         state='blocked' if blockers else 'missing_target' if target is None else 'unknown_actual' if actual is None else 'unconfirmed_handover' if not task.get('confirmed_complete') else 'zero_target' if target_cents==0 else 'met' if change>=0 else 'shortfall'
-        operations=og.get(key,o.iloc[:0]);observed=set(operations.date)
+        operations=og.get(key,no_operations);observed=set(operations.date)
         missing=[d for d in days if d not in observed]
-        closed_conflicts=[d for d in observed if (operations[operations.date==d].open_minutes==0).all() and (g[g.date==d].amount>0).any()]
+        open_days = set(operations.loc[operations.open_minutes > 0, 'date'])
+        sale_days = set(g.loc[g.amount > 0, 'date'])
+        closed_conflicts = sorted((observed - open_days) & sale_days)
         if closed_conflicts:warnings.append(f'{key[0]}/{key[1]}闭店日有正向交易，需核查业务日期。')
         labels=labels_by_key.get(key,[])
         rows.append({'store':key[0],'sku':key[1],'name':labels[-1] if labels else '无交易名称','names':labels,
@@ -164,6 +178,7 @@ def build_review(sources,frames,task):
         r['evidence_id']=f'E{len(facts)+1}'
         facts.append({'id':r['evidence_id'],'label':f"{r['store']}/{r['sku']} {r['name']}实际减目标",'value':r['difference_cents']/100 if r['difference_cents'] is not None and not blockers else None,'unit':'currency'})
     evaluable=[r for r in rows if r['status'] in {'met','shortfall'}]
+    task = {**task, 'start':start, 'end':end, 'previous_start':ps or None, 'previous_end':pe or None}
     return {'operation':'compare','metric':metric,'definition':{'label':LABELS[metric],'definition':'商品交易逐行数量×成交单价取分；目标来自提供的同周期同门店SKU计划，实际减目标不是经营原因。','unit':'currency'},
             'period':{'start':start,'end':end},'previous_period':{'start':ps,'end':pe} if ps else None,'task':task,'sources':sources,'rows':rows,'facts':facts,
             'totals':{**total,'actual_cents':selected_amount,'target_cents':target_total,'difference_cents':selected_amount-target_total if covered else None,'attainment':round(selected_amount/target_total*100,6) if target_total else None,'evaluable_categories':len(evaluable),'met_categories':sum(r['status']=='met' for r in evaluable),'categories':len(rows)},

@@ -32,3 +32,8 @@ outputs/*
 !outputs/privacy-scan-v2.6.json
 !outputs/closeout-acceptance-v2.6.0/*.log
 !outputs/real-model-settings-v2.6.json
+
+!outputs/offline-demo-v2.7.0/
+!outputs/closeout-acceptance-v2.7.0/
+!outputs/最终公开审查-v2.7.md
+!outputs/real-model-v2.7.json

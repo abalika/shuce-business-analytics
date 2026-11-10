@@ -41,7 +41,7 @@ def evaluate(output):
     def deny_network(*a, **kw):
         network_attempts.append(True)
         raise AssertionError('Offline evaluation attempted model access')
-    with TestClient(app, headers={'X-Shuce-Client':'1'}) as client, patch('app.ai.httpx.AsyncClient', deny_network):
+    with TestClient(app, base_url='http://127.0.0.1', headers={'X-Shuce-Client':'1'}) as client, patch('app.ai.httpx.AsyncClient', deny_network):
         def get(path):
             response = client.get(path)
             require(response.status_code == 200, 'GET workflow failed: ' + path)

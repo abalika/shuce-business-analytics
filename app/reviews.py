@@ -6,13 +6,14 @@ import pandas as pd
 from fastapi import APIRouter,File,Form,HTTPException,UploadFile,Query
 from fastapi.responses import FileResponse,Response,HTMLResponse
 from pydantic import BaseModel,Field
+from starlette.concurrency import run_in_threadpool
 from .engine import AnalysisError,read_frame
 from .review_engine import SCHEMAS,mapping_for,normalize_source,build_review
 from .review_demo import demo_blobs,demo_task
 from .exports import csv_response
 from .brief import generate_brief
 from .review_export import review_workbook
-from .integrity import fingerprints, verify_artifacts
+from .integrity import verify_artifacts, write_import_artifacts
 
 router=APIRouter(prefix='/api/ops')
 
@@ -55,13 +56,11 @@ def store_source(blob,filename,kind,mapping,name,source,currency):
     mapping=mapping or mapping_for(raw,kind)
     frame,quality,diagnostics=normalize_source(raw,kind,mapping)
     digest=hashlib.sha256(blob).hexdigest();source_id=uuid.uuid4().hex
-    frame.to_csv(host().DATA/f'{source_id}.review.csv.gz',index=False,compression='gzip')
-    pd.DataFrame(diagnostics,columns=['source_row','kind','reason','original_values']).to_csv(host().DATA/f'{source_id}.review-diagnostics.csv.gz',index=False,compression='gzip')
-    (host().DATA/f'{source_id}.review.raw').write_bytes(blob)
+    diagnostics = pd.DataFrame(diagnostics, columns=['source_row','kind','reason','original_values'])
     meta={'id':source_id,'name':name[:120] or Path(filename).name,'filename':Path(filename).name,'kind':kind,'source':source[:600] or '用户导入，真实性未验证','currency':currency,'mapping':mapping,'quality':quality,'file_sha256':digest,'created_at':datetime.now(timezone.utc).isoformat(),'contract_version':'retail-review-2.0'}
-    meta['artifact_sha256']=fingerprints(host().DATA,meta,True)
     initialize()
-    with host().connect() as con:con.execute('INSERT INTO review_sources VALUES (?,?)',(source_id,json.dumps(meta,ensure_ascii=False)))
+    with write_import_artifacts(host().DATA, meta, frame, diagnostics, blob, review=True), host().connect() as con:
+        con.execute('INSERT INTO review_sources VALUES (?,?)', (source_id, json.dumps(meta, ensure_ascii=False)))
     return meta
 
 
@@ -76,10 +75,10 @@ def list_sources():return sources_list()
 @router.post('/preview')
 async def preview(file:UploadFile=File(...),kind:str=Form('sales')):
     if kind not in SCHEMAS:raise AnalysisError('未知复盘数据类型。')
-    try:raw=read_frame(await host().upload_bytes(file),file.filename or '')
+    try:raw=await run_in_threadpool(read_frame,await host().upload_bytes(file),file.filename or '')
     except AnalysisError:raise
     except Exception:raise AnalysisError('无法读取该文件。') from None
-    return {'columns':list(raw.columns),'mapping':mapping_for(raw,kind),'sample':raw.fillna('').head(4).to_dict('records'),'rows':len(raw)}
+    return {'columns':list(raw.columns),'mapping':mapping_for(raw,kind),'sample':raw.head(4).fillna('').to_dict('records'),'rows':len(raw)}
 
 
 @router.post('/sources')
@@ -87,7 +86,7 @@ async def import_source(file:UploadFile=File(...),kind:str=Form('sales'),mapping
     try:mapped=json.loads(mapping)
     except ValueError:raise AnalysisError('字段映射须为JSON对象。') from None
     if not isinstance(mapped,dict):raise AnalysisError('字段映射须为JSON对象。')
-    return store_source(await host().upload_bytes(file),file.filename or '',kind,mapped,name,source,currency)
+    return await run_in_threadpool(store_source,await host().upload_bytes(file),file.filename or '',kind,mapped,name,source,currency)
 
 
 @router.get('/sources/{source_id}/original')
@@ -138,14 +137,13 @@ def create_review(body:ReviewBody):
     selected={kind:get_source(getattr(body,kind+'_id')) for kind in SCHEMAS}
     if any(meta['kind']!=kind for kind,meta in selected.items()):raise AnalysisError('三个输入必须分别是销售、目标、日运营表。')
     task=body.model_dump(exclude={'sales_id','targets_id','operations_id'})
-    if body.previous_review_id:
-        old=get_review(body.previous_review_id)
+    old = get_review(body.previous_review_id) if body.previous_review_id else None
+    if old:
         if old['metric']!=body.metric or old['currency']!=selected['sales']['currency']:raise AnalysisError('前次复盘指标或单位不同。')
-        if old['period']['end']>=body.start:raise AnalysisError('前次复盘必须早于本期。')
-        if body.previous_start!=old['period']['start'] or body.previous_end!=old['period']['end']:raise AnalysisError('基期须等于所关联的前次复盘期间。')
     result=build_review(selected,{kind:load_source(meta['id']) for kind,meta in selected.items()},task)
-    if body.previous_review_id:
-        old=get_review(body.previous_review_id)
+    if old:
+        if old['period']['end']>=result['period']['start']:raise AnalysisError('前次复盘必须早于本期。')
+        if result['previous_period']!=old['period']:raise AnalysisError('基期须等于所关联的前次复盘期间。')
         old_map={(r['store'],r['sku']):r for r in old['rows']}
         result['followup']={'previous_review_id':old['id'],'previous_title':old['task']['title'],'observations':[{'store':r['store'],'sku':r['sku'],'previous_shortfall_cents':old_map[(r['store'],r['sku'])]['shortfall_cents'],'current_shortfall_cents':r['shortfall_cents']} for r in result['rows'] if (r['store'],r['sku']) in old_map], 'note':'前后观察不证明措施有效；目标版本可能不同，请核查。'}
     return save_review(result)
@@ -179,12 +177,13 @@ def evidence_frame(review_id,evidence_id,kind):
     fact=next((f for f in r['facts'] if f['id']==evidence_id),None)
     if not fact:raise AnalysisError('证据不存在。')
     row=next((row for row in r['rows'] if row['evidence_id']==evidence_id),None)
-    frame=load_source(r['sources'][kind]['id']);task=r['task']
+    frame=load_source(r['sources'][kind]['id'])
+    period, base = r['period'], r.get('previous_period')
     if row is not None:frame=frame[(frame.store==row['store'])&(frame.sku==row['sku'])]
-    if kind=='targets':frame=frame[(frame.start==task['start'])&(frame.end==task['end'])&(frame.metric==r['metric'])]
+    if kind=='targets':frame=frame[(frame.start==period['start'])&(frame.end==period['end'])&(frame.metric==r['metric'])]
     else:
-        current=frame[(frame.date>=task['start'])&(frame.date<=task['end'])].assign(analysis_period='current')
-        previous=frame[(frame.date>=task['previous_start'])&(frame.date<=task['previous_end'])].assign(analysis_period='previous') if kind=='sales' and row is not None and task.get('previous_start') else frame.iloc[:0]
+        current=frame[frame.date.between(period['start'],period['end'])].assign(analysis_period='current')
+        previous=frame[frame.date.between(base['start'],base['end'])].assign(analysis_period='previous') if kind=='sales' and row is not None and base else frame.iloc[:0]
         frame=pd.concat([current,previous],ignore_index=True)
     return frame,{'fact':fact,'investigation':row,'source':r['sources'][kind],'review_id':r['id'],'currency':r['currency'],'kind':kind,'note':'源记录序号含表头为1；目标/运营证据是独立来源，引用不证明因果。'}
 

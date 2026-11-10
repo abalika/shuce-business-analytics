@@ -12,7 +12,7 @@ def client(tmp_path,monkeypatch):
     monkeypatch.setattr(main,"DB",tmp_path/"index.sqlite3")
     main.load_frame.cache_clear()
     main.initialize()
-    with TestClient(main.app,headers={"X-Shuce-Client":"1"}) as client:
+    with TestClient(main.app,base_url='http://127.0.0.1',headers={"X-Shuce-Client":"1"}) as client:
         yield client
     main.load_frame.cache_clear()
 

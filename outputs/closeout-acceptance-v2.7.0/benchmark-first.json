@@ -1,0 +1,154 @@
+{
+  "ok": true,
+  "suite": "shuce-offline-contract-v1",
+  "scope": "固定模拟样本的离线规则规划、口径守卫及三表计算；不是实时模型能力评分",
+  "suite_sha256": "51b7eb3805f8d35c06279b69e622c1164df5a040910e326e6d184dbce1c4eb9f",
+  "runner_sha256": "c15229afe83cffa37a2565de66a480e7576b782ef31fd9c51cbd10ba09a7ada9",
+  "version": "2.7.0",
+  "time_utc": "2026-11-10T07:20:03.415503+00:00",
+  "git": {
+    "commit": "0a7e5bf196a32ded7818e94bb3cfcc4fb9f40e52",
+    "dirty": true
+  },
+  "total": 20,
+  "passed": 20,
+  "pass_rate": 1.0,
+  "failure_categories": {},
+  "elapsed_ms": 1048.732,
+  "results": [
+    {
+      "id": "net-total",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 19.016
+    },
+    {
+      "id": "positive-total",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 15.566
+    },
+    {
+      "id": "negative-total",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 15.209
+    },
+    {
+      "id": "order-count",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 19.665
+    },
+    {
+      "id": "period-net",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 15.288
+    },
+    {
+      "id": "net-compare",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 25.703
+    },
+    {
+      "id": "quality",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 14.663
+    },
+    {
+      "id": "ctr",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 18.413
+    },
+    {
+      "id": "views",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 15.371
+    },
+    {
+      "id": "clicks",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 15.865
+    },
+    {
+      "id": "ambiguous-income",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 5.557
+    },
+    {
+      "id": "missing-periods",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 3.001
+    },
+    {
+      "id": "profit-guard",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 2.6
+    },
+    {
+      "id": "code-guard",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 2.506
+    },
+    {
+      "id": "review-total",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 322.302
+    },
+    {
+      "id": "review-attainment",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 51.201
+    },
+    {
+      "id": "review-orders-not-lines",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 54.28
+    },
+    {
+      "id": "review-reconciled",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 54.575
+    },
+    {
+      "id": "review-period",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 50.553
+    },
+    {
+      "id": "review-currency",
+      "passed": true,
+      "failures": [],
+      "elapsed_ms": 52.838
+    }
+  ],
+  "mode": "offline-rule-and-deterministic-compute",
+  "model_id": null,
+  "model_parameters": null,
+  "model_requests": 0,
+  "provider_network_attempts": 0,
+  "cost": {
+    "amount": 0,
+    "currency": "USD",
+    "basis": "No provider requests; local compute/electricity not estimated"
+  },
+  "comparison": {
+    "available": false,
+    "reason": "No previous run supplied"
+  }
+}

@@ -8,7 +8,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 FOLDERS = ('app', 'web', 'scripts', 'tests', 'docs', 'examples', 'sql', 'licenses', '.github')
 ROOT_FILES = ('README.md', 'HANDOFF.md', 'AGENTS.md', 'requirements.txt', 'requirements.lock.txt',
-              '.env.example', '.gitignore', '.gitattributes', 'LICENSE', 'CHANGELOG.md', 'SECURITY.md', 'CONTRIBUTING.md', '启动数策.cmd', '停止数策.cmd', '数据维护.cmd', '离线演示.cmd')
+              'pytest.ini', '.env.example', '.gitignore', '.gitattributes', 'LICENSE', 'CHANGELOG.md', 'SECURITY.md', 'CONTRIBUTING.md', '启动数策.cmd', '停止数策.cmd', '数据维护.cmd', '离线演示.cmd')
 
 
 def checkpoint(label):

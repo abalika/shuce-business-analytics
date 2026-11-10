@@ -14,13 +14,13 @@ import package_project
 
 def sources():
     files={name:b'x' for name in REQUIRED}
-    files['outputs/offline-demo-v2.6.0/evaluation.json']=json.dumps({'ok':True,'version':'2.6.0','provider_network_attempts':0,'files':{'index.html':hashlib.sha256(b'x').hexdigest()}}).encode()
-    files['outputs/closeout-acceptance-v2.6.0/evaluation.json']=json.dumps({'ok':True,'version':'2.6.0','checks':[{'passed':True}]}).encode()
+    files['outputs/offline-demo-v2.7.0/evaluation.json']=json.dumps({'ok':True,'version':'2.7.0','provider_network_attempts':0,'files':{'index.html':hashlib.sha256(b'x').hexdigest()}}).encode()
+    files['outputs/closeout-acceptance-v2.7.0/evaluation.json']=json.dumps({'ok':True,'version':'2.7.0','checks':[{'passed':True}]}).encode()
     return files
 
 
 def write_archive(path,files,*,extra=None,tamper=None):
-    manifest={'version':'2.6.0','contains_user_data':False,'files':{k:{'bytes':len(v),'sha256':hashlib.sha256(v).hexdigest()} for k,v in files.items()}}
+    manifest={'version':'2.7.0','contains_user_data':False,'files':{k:{'bytes':len(v),'sha256':hashlib.sha256(v).hexdigest()} for k,v in files.items()}}
     with zipfile.ZipFile(path,'w') as archive:
         for name,data in files.items():archive.writestr(name,b'tampered' if name==tamper else data)
         archive.writestr('PACKAGE-MANIFEST.json',json.dumps(manifest))
@@ -34,7 +34,7 @@ def test_valid_archive_and_content_tamper(tmp_path):
     with pytest.raises(ValueError,match='hash'):verify(path)
 
 
-@pytest.mark.parametrize('name',['../escape.py','app/../../escape.py','C:/secret','app/.env','data/index.sqlite3','work/log.json','app/__pycache__/main.pyc','outputs/user.csv','.local-model-env','app/./escape.py','app//escape.py','app/CON.py','app/trailing.'])
+@pytest.mark.parametrize('name',['../escape.py','app/../../escape.py','C:/secret','app/.env','app/.env.local','app/.env-model-temp','DATA/index.sqlite3','data/index.sqlite3','work/log.json','app/__pycache__/main.pyc','outputs/user.csv','.local-model-env','app/./escape.py','app//escape.py','app/CON.py','app/trailing.'])
 def test_forbidden_paths(tmp_path,name):
     assert not allowed(name)
     path=tmp_path/'bad.zip';write_archive(path,sources(),extra=(name,b'private'))

@@ -52,10 +52,9 @@
   function payload(){
     return {base_url:find('modelBaseUrl').value,model:find('modelId').value,api_key:find('modelApiKey').value||null,remember:find('modelRemember').checked,revision};
   }
-  async function refreshStatus(){
-    const status=await fetch('/api/status',{cache:'no-store'}).then(r=>r.json());
+  function refreshStatus(settings){
     const node=document.querySelector('#aiStatus')||document.querySelector('#modelStatus');
-    if(node)node.textContent=status.ai.configured?'模型已配置 · 可生成 AI 摘要':status.ai.offline?'离线 · 规则计算 · 非实时模型':'规则计算 · 模型未配置';
+    if(node)node.textContent=settings.configured?'模型已配置 · 可生成 AI 摘要':settings.offline?'离线 · 规则计算 · 非实时模型':'规则计算 · 模型未配置';
   }
   document.querySelector('#openModelSettings')?.addEventListener('click',async()=>{
     secret();loaded=false;pending=false;offline=true;controls();message('读取本机设置…');root.showModal();
@@ -65,11 +64,11 @@
   root.addEventListener('cancel',event=>{if(pending)event.preventDefault();});
   root.addEventListener('close',()=>{secret();find('modelRemember').checked=false;});
   find('modelSettingsForm').onsubmit=event=>{
-    event.preventDefault();busy(async()=>{const saved=await request('POST',payload());secret();apply(saved);message(saved.detail);await refreshStatus();});
+    event.preventDefault();busy(async()=>{const saved=await request('POST',payload());secret();apply(saved);message(saved.detail);refreshStatus(saved);});
   };
   find('modelTest').onclick=()=>{if(find('modelSettingsForm').reportValidity())busy(async()=>message((await request('TEST',payload())).detail));};
   find('modelClear').onclick=()=>busy(async()=>{
     if(!window.confirm('清除本工作台保存的模型配置并改用规则计算？其他软件和外部网关不会被修改。')){message('已取消清除。');return;}
-    const saved=await request('DELETE',{revision});secret();apply(saved);message(saved.detail);await refreshStatus();
+    const saved=await request('DELETE',{revision});secret();apply(saved);message(saved.detail);refreshStatus(saved);
   });
 })();

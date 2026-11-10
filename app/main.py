@@ -19,10 +19,12 @@ from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile, Que
 from fastapi.responses import FileResponse, HTMLResponse, Response, JSONResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.staticfiles import StaticFiles
+from starlette.concurrency import run_in_threadpool
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 from pydantic import BaseModel, Field
 from .engine import AnalysisError, SCHEMAS, infer_mapping, metrics, normalize, overview, read_frame, run_tool, evidence_rows
 from .exports import csv_response
-from .integrity import IntegrityError, fingerprints, verify_artifacts
+from .integrity import IntegrityError, verify_artifacts, write_import_artifacts
 from .ai import plan_question, status
 from .brief import generate_brief
 from .scenarios import SCENARIOS, guide_for
@@ -51,6 +53,7 @@ initialize()
 from .version import VERSION
 
 app = FastAPI(title="数策 · 可复核业务分析", version=VERSION)
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=['127.0.0.1', 'localhost'], www_redirect=False)
 from .model_settings import router as model_settings_router
 app.include_router(model_settings_router)
 
@@ -146,18 +149,15 @@ def store_dataset(blob, filename, mode, mapping, name, source, currency, *, canc
     frame, quality = normalize(raw, mode, mapping or infer_mapping(raw, mode), cancellation_prefix=cancellation_prefix,diagnostics=diagnostics)
     dataset_id = uuid.uuid4().hex
     quality["file_sha256"] = hashlib.sha256(blob).hexdigest()
-    frame.to_csv(DATA / f"{dataset_id}.csv.gz", index=False, compression="gzip")
-    pd.DataFrame(diagnostics,columns=["source_row","kind","reason","date_raw","dimension_raw","entity_raw","original_values"]).to_csv(DATA/f"{dataset_id}-diagnostics.csv.gz",index=False,compression="gzip")
-    # Original bytes remain local, with generated names; client paths never become filesystem paths.
-    (DATA / f"{dataset_id}.raw").write_bytes(blob)
+    diagnostics = pd.DataFrame(diagnostics, columns=["source_row","kind","reason","date_raw","dimension_raw","entity_raw","original_values"])
     meta = {"id": dataset_id, "name": name or Path(filename).name, "filename": Path(filename).name,
             "mode": mode, "source": source or "用户导入；业务真实性未由系统验证", "currency": currency,
             "quality": quality, "mapping": mapping or infer_mapping(raw, mode), "created_at": datetime.now(timezone.utc).isoformat(),
-            "import_ms": round((time.perf_counter()-t0)*1000), "metrics": metrics(mode),"schema_version":2,"cancellation_prefix":cancellation_prefix}
-    meta['artifact_sha256'] = fingerprints(DATA, meta)
+            "metrics": metrics(mode),"schema_version":2,"cancellation_prefix":cancellation_prefix}
     if scenario_key:
         meta["guide"] = guide_for(scenario_key)
-    with connect() as con:
+    with write_import_artifacts(DATA, meta, frame, diagnostics, blob), connect() as con:
+        meta['import_ms'] = round((time.perf_counter()-t0)*1000)
         con.execute("INSERT INTO datasets VALUES (?,?)", (dataset_id, json.dumps(meta, ensure_ascii=False)))
     return meta
 
@@ -194,12 +194,12 @@ async def preview(file: UploadFile = File(...), mode: str = Form("orders")):
         raise AnalysisError("未知模板。")
     blob = await upload_bytes(file)
     try:
-        frame = read_frame(blob, file.filename or "")
+        frame = await run_in_threadpool(read_frame, blob, file.filename or "")
     except AnalysisError:
         raise
     except Exception:
         raise AnalysisError("无法读取文件，请检查文件内容。") from None
-    return {"columns": list(frame.columns), "mapping": infer_mapping(frame, mode), "rows": len(frame), "sample": frame.fillna("").head(5).to_dict("records")}
+    return {"columns": list(frame.columns), "mapping": infer_mapping(frame, mode), "rows": len(frame), "sample": frame.head(5).fillna("").to_dict("records")}
 
 
 @app.post("/api/import")
@@ -212,7 +212,7 @@ async def import_file(file: UploadFile = File(...), mode: str = Form("orders"), 
             raise ValueError()
     except ValueError:
         raise AnalysisError("字段映射必须是JSON对象。") from None
-    return store_dataset(await upload_bytes(file), file.filename or "", mode, mapped, name[:120], source[:600], currency)
+    return await run_in_threadpool(store_dataset, await upload_bytes(file), file.filename or "", mode, mapped, name[:120], source[:600], currency)
 
 
 @app.post("/api/demo/{mode}")

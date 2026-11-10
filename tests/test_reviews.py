@@ -115,7 +115,7 @@ def test_scalar_date_overlap_and_confirmation_guards():
 @pytest.fixture
 def client(tmp_path,monkeypatch):
     monkeypatch.setattr(main,'DATA',tmp_path);monkeypatch.setattr(main,'DB',tmp_path/'index.sqlite3');main.initialize()
-    with TestClient(main.app,headers={'X-Shuce-Client':'1'}) as c:yield c
+    with TestClient(main.app,base_url='http://127.0.0.1',headers={'X-Shuce-Client':'1'}) as c:yield c
 
 
 def test_api_evidence_three_origins_and_csv(client):
@@ -129,6 +129,31 @@ def test_api_evidence_three_origins_and_csv(client):
         assert client.get(url.split('?')[0]+'/export?kind='+kind).status_code==200
     assert client.get(f"/api/ops/reviews/{r['id']}/evidence/BAD").status_code==422
     assert client.get(f"/api/ops/reviews/{r['id']}/evidence/E1?offset=-1").status_code==422
+
+
+def test_evidence_reads_the_calculated_period_even_for_old_task_dates(client):
+    demo = client.post('/api/ops/demo').json()
+    source_ids = {kind + '_id': meta['id'] for kind, meta in demo['sources'].items()}
+    task = {**demo['task'], **source_ids}
+    for field in ('start', 'end', 'previous_start', 'previous_end'):
+        task[field] = ' ' + task[field] + ' 00:00:00 '
+    response = client.post('/api/ops/reviews', json=task)
+    assert response.status_code == 200
+    review = response.json()
+    assert review['totals'] == demo['totals']
+    assert review['task']['start'] == demo['period']['start']
+    # Simulate an existing snapshot saved before canonical task dates were persisted.
+    old = reviews.save_review({**review, 'task': task})
+    for snapshot in (review, old):
+        row = next(row for row in snapshot['rows'] if row['store'] == 'S01' and row['sku'] == 'LATTE')
+        url = f"/api/ops/reviews/{snapshot['id']}/evidence/{row['evidence_id']}"
+        sales = client.get(url + '?kind=sales&limit=100').json()['rows']
+        assert {r['analysis_period'] for r in sales} == {'current', 'previous'}
+        assert sum(r['amount'] for r in sales if r['analysis_period'] == 'current') == row['actual_cents']
+        targets = client.get(url + '?kind=targets').json()['rows']
+        assert [r['target_cents'] for r in targets] == [row['target_cents']]
+        ops = client.get(url + '?kind=operations').json()['rows']
+        assert len(ops) == row['operations']['observed_days']
 
 
 def test_report_append_versions_and_reopen_persistence(client):

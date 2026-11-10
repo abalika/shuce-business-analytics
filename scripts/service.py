@@ -78,9 +78,11 @@ def identity(data, offline):
 
 
 def powershell(code):
-    encoded = base64.b64encode(code.encode('utf-16le')).decode()
+    script = '[Console]::OutputEncoding = [Text.UTF8Encoding]::new($false); ' + code
+    encoded = base64.b64encode(script.encode('utf-16le')).decode()
     result = subprocess.run(['powershell.exe','-NoProfile','-NonInteractive','-EncodedCommand',encoded],
-                            capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW)
+                            capture_output=True, encoding='utf-8', errors='replace',
+                            creationflags=subprocess.CREATE_NO_WINDOW)
     if result.returncode:
         raise ValueError('Windows service operation failed; no other service was stopped.')
     return result.stdout.strip()

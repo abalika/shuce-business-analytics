@@ -12,12 +12,13 @@ from datetime import datetime
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+from app.version import VERSION
 
 
 def evaluate(output):
     output.mkdir(parents=True,exist_ok=False)
     started = time.perf_counter()
-    result = {'ok':False,'version':'2.6.0','started_at':datetime.now().isoformat(),'checks':[],'real_model_requests':0}
+    result = {'ok':False,'version':VERSION,'started_at':datetime.now().isoformat(),'checks':[],'real_model_requests':0}
     def save():
         (output/'evaluation.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
     def run(name, command):
@@ -32,8 +33,8 @@ def evaluate(output):
         node = shutil.which('node')
         if not node: raise ValueError('Node.js required for JavaScript acceptance')
         run('javascript-tests',[node,'--test','tests/review-drafts.test.cjs','tests/api-feedback.test.cjs','tests/model-settings.test.cjs'])
-        for name in ('app','ops','model-settings'):
-            run('javascript-syntax-'+name,[node,'--check','web/'+name+'.js'])
+        for script in sorted((ROOT/'web').glob('*.js')):
+            run('javascript-syntax-'+script.stem,[node,'--check',str(script)])
         run('offline',[sys.executable,str(ROOT/'scripts/offline_eval.py'),'--out',str(output/'offline-demo')])
         run('benchmark-first',[sys.executable,str(ROOT/'scripts/benchmark.py'),'--out',str(output/'benchmark-first.json')])
         run('benchmark-repeat',[sys.executable,str(ROOT/'scripts/benchmark.py'),'--out',str(output/'benchmark-repeat.json'),'--previous',str(output/'benchmark-first.json')])

@@ -1,0 +1,62 @@
+{
+  "before": {
+    "ok": true,
+    "counts": {
+      "analyses": 1,
+      "datasets": 1,
+      "reports": 0,
+      "review_sources": 3,
+      "reviews": 3
+    },
+    "files": 13,
+    "source_batches": 4
+  },
+  "backup": {
+    "ok": true,
+    "counts": {
+      "analyses": 1,
+      "datasets": 1,
+      "reports": 0,
+      "review_sources": 3,
+      "reviews": 3
+    },
+    "bytes": 23710,
+    "sha256": "1328d88a652098e902aae1f1ed69c11a98e824e3802c13a900aae1fe5c88b2e8"
+  },
+  "verify": {
+    "ok": true,
+    "counts": {
+      "analyses": 1,
+      "datasets": 1,
+      "reports": 0,
+      "review_sources": 3,
+      "reviews": 3
+    },
+    "files": 13,
+    "source_batches": 4
+  },
+  "restore": {
+    "ok": true,
+    "counts": {
+      "analyses": 1,
+      "datasets": 1,
+      "reports": 0,
+      "review_sources": 3,
+      "reviews": 3
+    },
+    "files": 13,
+    "source_batches": 4
+  },
+  "after": {
+    "ok": true,
+    "counts": {
+      "analyses": 1,
+      "datasets": 1,
+      "reports": 0,
+      "review_sources": 3,
+      "reviews": 3
+    },
+    "files": 13,
+    "source_batches": 4
+  }
+}

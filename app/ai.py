@@ -78,7 +78,9 @@ async def complete_json(system: str, user: str, max_tokens=1100) -> tuple[dict, 
             if not isinstance(result, dict):
                 raise ValueError()
             attempts.append({"attempt": attempt+1, "status": "accepted"})
-            return result, {"provider": "model", "label": "真实模型调用", "model": c["model"], "elapsed_ms": round((time.perf_counter()-t0)*1000), "tokens": body.get("usage", {}).get("total_tokens"), "attempts": attempts}
+            usage = body.get('usage')
+            tokens = usage.get('total_tokens') if isinstance(usage, dict) else None
+            return result, {"provider": "model", "label": "真实模型调用", "model": c["model"], "elapsed_ms": round((time.perf_counter()-t0)*1000), "tokens": tokens if type(tokens) is int and tokens >= 0 else None, "attempts": attempts}
         except ModelError:
             raise
         except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError) as exc:

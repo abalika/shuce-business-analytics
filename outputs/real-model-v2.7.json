@@ -1,0 +1,599 @@
+{
+  "version": "2.7.0",
+  "started_utc": "2026-11-10T07:13:21.200257+00:00",
+  "finished_utc": "2026-11-10T07:13:49.191725+00:00",
+  "model": "cn:deepseek-v4.1-flash",
+  "dataset_scope": "synthetic fixtures only",
+  "passed": 8,
+  "total": 8,
+  "model_requests": 12,
+  "reported_tokens": 6876,
+  "requests_missing_usage": 0,
+  "cost": null,
+  "ok": true,
+  "scope": "应用接口调用真实模型；项目模拟数据；独立测试库。",
+  "provider_requests": [
+    {
+      "case": "connection_probe",
+      "stage": "probe",
+      "status": 200,
+      "elapsed_ms": 1270,
+      "total_tokens": 19,
+      "returned_model": "deepseek-v4.1-flash"
+    },
+    {
+      "case": "coffee_compare",
+      "stage": "planning",
+      "status": 200,
+      "elapsed_ms": 1731,
+      "total_tokens": 374,
+      "returned_model": "deepseek-v4.1-flash"
+    },
+    {
+      "case": "coffee_compare",
+      "stage": "summary",
+      "status": 200,
+      "elapsed_ms": 2543,
+      "total_tokens": 851,
+      "returned_model": "deepseek-v4.1-flash"
+    },
+    {
+      "case": "coffee_daily",
+      "stage": "planning",
+      "status": 200,
+      "elapsed_ms": 1777,
+      "total_tokens": 345,
+      "returned_model": "deepseek-v4.1-flash"
+    },
+    {
+      "case": "coffee_daily",
+      "stage": "summary",
+      "status": 200,
+      "elapsed_ms": 2074,
+      "total_tokens": 1045,
+      "returned_model": "deepseek-v4.1-flash"
+    },
+    {
+      "case": "coffee_receipts",
+      "stage": "planning",
+      "status": 200,
+      "elapsed_ms": 1689,
+      "total_tokens": 346,
+      "returned_model": "deepseek-v4.1-flash"
+    },
+    {
+      "case": "coffee_receipts",
+      "stage": "summary",
+      "status": 200,
+      "elapsed_ms": 2017,
+      "total_tokens": 623,
+      "returned_model": "deepseek-v4.1-flash"
+    },
+    {
+      "case": "content_compare",
+      "stage": "planning",
+      "status": 200,
+      "elapsed_ms": 2013,
+      "total_tokens": 362,
+      "returned_model": "deepseek-v4.1-flash"
+    },
+    {
+      "case": "content_compare",
+      "stage": "summary",
+      "status": 200,
+      "elapsed_ms": 2693,
+      "total_tokens": 830,
+      "returned_model": "deepseek-v4.1-flash"
+    },
+    {
+      "case": "content_ctr",
+      "stage": "planning",
+      "status": 200,
+      "elapsed_ms": 1610,
+      "total_tokens": 342,
+      "returned_model": "deepseek-v4.1-flash"
+    },
+    {
+      "case": "content_ctr",
+      "stage": "summary",
+      "status": 200,
+      "elapsed_ms": 2265,
+      "total_tokens": 698,
+      "returned_model": "deepseek-v4.1-flash"
+    },
+    {
+      "case": "three_table_summary",
+      "stage": "summary",
+      "status": 200,
+      "elapsed_ms": 2410,
+      "total_tokens": 1041,
+      "returned_model": "deepseek-v4.1-flash"
+    }
+  ],
+  "checks": [
+    {
+      "id": "connection_probe",
+      "passed": true,
+      "elapsed_ms": 1597,
+      "detail": {
+        "http_status": 200,
+        "saved": false
+      }
+    },
+    {
+      "id": "coffee_compare",
+      "passed": true,
+      "elapsed_ms": 4849,
+      "detail": {
+        "expected_plan": {
+          "operation": "compare",
+          "metric": "amount",
+          "previous_start": "2026-09-14",
+          "previous_end": "2026-09-20",
+          "start": "2026-09-21",
+          "end": "2026-09-27"
+        },
+        "controls": [
+          1614.0,
+          1696.0,
+          -82.0
+        ],
+        "summary": {
+          "facts": [
+            {
+              "text": "本期净交易额：1,614.00 元。",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "基期净交易额：1,696.00 元。",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "变化量：-82.00 元。",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "拿铁咖啡变化贡献：-208.00 元。",
+              "evidence_ids": [
+                "E5"
+              ]
+            }
+          ],
+          "hypotheses": [
+            {
+              "text": "净交易额较基期有所变化，可能受拿铁咖啡等分类的交易额变动影响，需核查对应记录的数量与单价明细。",
+              "evidence_ids": [
+                "E1",
+                "E2",
+                "E3",
+                "E5"
+              ]
+            }
+          ],
+          "next_checks": [
+            {
+              "text": "核对本期与基期拿铁咖啡等分类的交易明细，检查数量与单价差异及负向调整记录。",
+              "evidence_ids": [
+                "E5",
+                "E6",
+                "E7",
+                "E8"
+              ]
+            },
+            {
+              "text": "核对净交易额汇总所依据的记录完整性，检查是否存在无效行或重复记录影响汇总。",
+              "evidence_ids": [
+                "E1",
+                "E2",
+                "E3"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "coffee_daily",
+      "passed": true,
+      "elapsed_ms": 4427,
+      "detail": {
+        "expected_plan": {
+          "operation": "trend",
+          "metric": "amount",
+          "grain": "day",
+          "start": "2026-09-14",
+          "end": "2026-09-27"
+        },
+        "controls": {
+          "2026-09-14": 246.0,
+          "2026-09-15": 246.0,
+          "2026-09-16": 246.0,
+          "2026-09-17": 246.0,
+          "2026-09-18": 246.0,
+          "2026-09-19": 246.0,
+          "2026-09-20": 220.0,
+          "2026-09-21": 238.0,
+          "2026-09-22": 238.0,
+          "2026-09-23": 238.0,
+          "2026-09-24": 238.0,
+          "2026-09-25": 238.0,
+          "2026-09-26": 238.0,
+          "2026-09-27": 186.0
+        },
+        "summary": {
+          "facts": [
+            {
+              "text": "2026-09-14：246.00 元。",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "2026-09-20：220.00 元。",
+              "evidence_ids": [
+                "E7"
+              ]
+            },
+            {
+              "text": "2026-09-21：238.00 元。",
+              "evidence_ids": [
+                "E8"
+              ]
+            },
+            {
+              "text": "2026-09-27：186.00 元。",
+              "evidence_ids": [
+                "E14"
+              ]
+            }
+          ],
+          "hypotheses": [
+            {
+              "text": "净交易额在区间后段出现回落，可能由负数量记录或有效行变动影响，需核查相关明细记录。",
+              "evidence_ids": [
+                "E7",
+                "E14"
+              ]
+            }
+          ],
+          "next_checks": [
+            {
+              "text": "核对后段各日交易明细，逐行比对数量与单价，检查负数量记录及无效行隔离情况。",
+              "evidence_ids": [
+                "E7",
+                "E8",
+                "E14"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "coffee_receipts",
+      "passed": true,
+      "elapsed_ms": 4256,
+      "detail": {
+        "expected_plan": {
+          "operation": "ranking",
+          "metric": "positive_amount",
+          "start": "2026-09-14",
+          "end": "2026-09-27"
+        },
+        "controls": {
+          "拿铁咖啡": 910.0,
+          "柠檬茶": 672.0,
+          "美式咖啡": 882.0,
+          "芝士蛋糕": 924.0
+        },
+        "summary": {
+          "facts": [
+            {
+              "text": "芝士蛋糕：924.00 元。",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "拿铁咖啡：910.00 元。",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "美式咖啡：882.00 元。",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "柠檬茶：672.00 元。",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ],
+          "hypotheses": [
+            {
+              "text": "正向交易额排名靠前可能受各商品销量与单价结构共同影响，需核查各商品的有效交易笔数与成交单价分布。",
+              "evidence_ids": [
+                "E1",
+                "E2",
+                "E3",
+                "E4"
+              ]
+            }
+          ],
+          "next_checks": [
+            {
+              "text": "核对各商品正向交易额的明细记录，以检查有效行数量、单价及负向调整是否影响合计。",
+              "evidence_ids": [
+                "E1",
+                "E2",
+                "E3",
+                "E4"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "content_compare",
+      "passed": true,
+      "elapsed_ms": 5265,
+      "detail": {
+        "expected_plan": {
+          "operation": "compare",
+          "metric": "clicks",
+          "previous_start": "2026-09-14",
+          "previous_end": "2026-09-20",
+          "start": "2026-09-21",
+          "end": "2026-09-27"
+        },
+        "controls": [
+          490,
+          392,
+          98
+        ],
+        "summary": {
+          "facts": [
+            {
+              "text": "本期点击次数：490 次/个。",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "基期点击次数：392 次/个。",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "变化量：98 次/个。",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "相对变化：25.0 %。",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ],
+          "hypotheses": [
+            {
+              "text": "点击次数总体可能有所变化，需核查各内容项带来的统计贡献是否与曝光和受众差异有关，尚不能据此归因。",
+              "evidence_ids": [
+                "E1",
+                "E2",
+                "E3",
+                "E4"
+              ]
+            },
+            {
+              "text": "部分内容项的变化贡献方向不一，可能存在结构调整或活动引流差异，需核查对应期间的上下架与推广记录。",
+              "evidence_ids": [
+                "E5",
+                "E6",
+                "E7"
+              ]
+            }
+          ],
+          "next_checks": [
+            {
+              "text": "核对本期与基期的分内容项曝光量及受众分布记录，以检查点击次数变化是否由展示机会差异所致。",
+              "evidence_ids": [
+                "E1",
+                "E2",
+                "E5",
+                "E6"
+              ]
+            },
+            {
+              "text": "核对校园优惠、咖啡知识、新品菜单的上架与推广记录，以验证贡献拆解与实际操作时间是否一致。",
+              "evidence_ids": [
+                "E5",
+                "E6",
+                "E7"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "content_ctr",
+      "passed": true,
+      "elapsed_ms": 4440,
+      "detail": {
+        "expected_plan": {
+          "operation": "ranking",
+          "metric": "ctr",
+          "start": "2026-09-14",
+          "end": "2026-09-27"
+        },
+        "controls": {
+          "咖啡知识": 2.25,
+          "新品菜单": 3.5,
+          "校园优惠": 4.0
+        },
+        "summary": {
+          "facts": [
+            {
+              "text": "校园优惠：4.0 %。",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "新品菜单：3.5 %。",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "咖啡知识：2.25 %。",
+              "evidence_ids": [
+                "E3"
+              ]
+            }
+          ],
+          "hypotheses": [
+            {
+              "text": "校园优惠点击率高于其他两组，可能受曝光样本与受众构成影响，需核查曝光来源与人群差异。",
+              "evidence_ids": [
+                "E1",
+                "E2",
+                "E3"
+              ]
+            },
+            {
+              "text": "各组点击率差异或许是曝光量不同所致，尚无结论，需核查曝光分布与展示位置。",
+              "evidence_ids": [
+                "E1",
+                "E2",
+                "E3"
+              ]
+            }
+          ],
+          "next_checks": [
+            {
+              "text": "核对各组曝光量与受众来源记录，以检查点击率差异是否受样本规模影响。",
+              "evidence_ids": [
+                "E1",
+                "E2",
+                "E3"
+              ]
+            },
+            {
+              "text": "核对各行点击与曝光的原始记录完整性，以验证汇总口径是否一致。",
+              "evidence_ids": [
+                "E1",
+                "E2",
+                "E3"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "three_table_summary",
+      "passed": true,
+      "elapsed_ms": 3010,
+      "detail": {
+        "summary": {
+          "facts": [
+            {
+              "text": "本期有效记录净交易额：2,866.00 元。",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "同范围计划目标：2,660.00 元。",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "实际减目标：206.00 元。",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "整体目标达成率：107.744361 %。",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ],
+          "hypotheses": [
+            {
+              "text": "整体净交易额高于同范围计划，但可能存在门店或SKU层面的差异，需核查各明细记录。",
+              "evidence_ids": [
+                "E3",
+                "E4"
+              ]
+            },
+            {
+              "text": "部分SKU实际减目标为负，可能存在个别商品低于计划的情况，需核查对应销售与目标记录。",
+              "evidence_ids": [
+                "E5"
+              ]
+            }
+          ],
+          "next_checks": [
+            {
+              "text": "核对各SKU每日销售明细与计划目标记录，以检查差异来源与记录完整性。",
+              "evidence_ids": [
+                "E5",
+                "E6",
+                "E7",
+                "E8"
+              ]
+            },
+            {
+              "text": "核对另一门店SKU的成交数量与单价记录，以验证其偏差是否与计划口径一致。",
+              "evidence_ids": [
+                "E9",
+                "E10",
+                "E11",
+                "E12"
+              ]
+            }
+          ]
+        },
+        "actual_cents": 286600,
+        "target_cents": 266000,
+        "met": 7,
+        "groups": 8,
+        "report_reopened": true,
+        "latte_evidence_totals": {
+          "sales": 37,
+          "targets": 1,
+          "operations": 6
+        }
+      }
+    },
+    {
+      "id": "profit_guard",
+      "passed": true,
+      "elapsed_ms": 3,
+      "detail": {
+        "model_requests": 0,
+        "blocked": true
+      }
+    }
+  ]
+}

@@ -54,7 +54,7 @@ def evaluate(output, previous=None):
         network.append(True)
         raise AssertionError('Model access forbidden during offline benchmark')
     rows=[]
-    with TestClient(app,headers={'X-Shuce-Client':'1'}) as client, patch('app.ai.httpx.AsyncClient',blocked):
+    with TestClient(app,base_url='http://127.0.0.1',headers={'X-Shuce-Client':'1'}) as client, patch('app.ai.httpx.AsyncClient',blocked):
         datasets = {}
         for key in ('coffee_orders','coffee_content'):
             response = client.post('/api/scenarios/'+key)

@@ -44,7 +44,7 @@ def smoke(archive, destination, report_path):
             with opener.open(req,timeout=10) as response:
                 return response.read() if binary else json.load(response)
         status=request('/api/status')
-        if status['version']!='2.6.0' or not status['ai']['offline']:raise ValueError('Wrong instance mode/version')
+        if status['version']!=checked['version'] or not status['ai']['offline']:raise ValueError('Wrong instance mode/version')
         # The launching PowerShell has exited. The service must still answer.
         result['checks'].append('survives-launching-shell-exit')
         review=request('/api/ops/demo',{})

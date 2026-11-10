@@ -100,6 +100,7 @@ def test_unexpected_errors_are_safe_and_recoverable(client, monkeypatch, caplog,
 
 @pytest.mark.parametrize('failure', ['timeout', 'connect', 401, 402, 429, 503])
 def test_provider_matrix_with_structured_recovery(client, monkeypatch, failure):
+    monkeypatch.setenv('SHUCE_OFFLINE', '0')
     monkeypatch.setattr(ai, 'config', lambda:{'key':'private-test-value', 'base':'https://provider.invalid/v1', 'model':'test-only'})
     async def no_sleep(*args): pass
     monkeypatch.setattr(ai.asyncio, 'sleep', no_sleep)
