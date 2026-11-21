@@ -10,7 +10,7 @@
 
 ![两店经营复盘界面](docs/assets/review-desktop.png)
 
-*界面截图摄于 2026-10-20，使用 v2.3.1 和项目模拟数据。*
+*当前主分支的经营复盘界面，使用两店模拟数据。点击门店与商品偏差可查看对应证据。*
 
 无需安装：下载仓库或 [Release 交付包](https://github.com/abalika/shuce-business-analytics/releases)，打开 `outputs/offline-demo-v2.7.0/index.html`。里面有独立 HTML 报告、Excel、JSON、三张源表和三类证据 CSV。它们明确标注“预置演示数据 / 非实时”，静态报告不会重新计算。
 
